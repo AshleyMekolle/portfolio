@@ -1,0 +1,132 @@
+/* ── Shared ── */
+.label {
+  display: flex; align-items: center; gap: 14px;
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: .18em; color: var(--accent);
+  text-transform: uppercase; margin-bottom: 14px;
+}
+.labelCenter { justify-content: center; }
+.title {
+  font-family: var(--display);
+  font-size: clamp(44px, 5.5vw, 76px);
+  line-height: .95; letter-spacing: .04em;
+  color: var(--ink); margin-bottom: 56px;
+}
+.ac  { color: var(--accent); }
+
+/* ── Skills ── */
+.skillsSection { padding: 100px 52px; background: var(--bg-2); }
+.skillGrid { display: grid; grid-template-columns: repeat(5,1fr); gap: 2px; }
+.skillGroup {
+  background: var(--bg-card); border: 1px solid var(--line);
+  padding: 28px 24px; transition: border-color .2s;
+}
+.skillGroup:hover { border-color: var(--accent-2); }
+.groupTitle {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line-2);
+}
+.skillList { display: flex; flex-direction: column; gap: 10px; }
+.skillItem {
+  font-size: 13px; color: var(--ink-2); font-weight: 300;
+  display: flex; align-items: center; gap: 8px;
+}
+.skillItem::before { content: '>'; font-family: var(--mono); font-size: 10px; color: var(--accent); opacity: .6; }
+
+/* ── Experience ── */
+.expSection { padding: 100px 52px; background: var(--bg); }
+.timeline { display: grid; grid-template-columns: 180px 1fr; gap: 0 52px; }
+.tlDate {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .06em;
+  color: var(--ink-3); padding-top: 3px; text-align: right; line-height: 1.6;
+}
+.tlBody {
+  padding-bottom: 48px; border-left: 1px solid var(--line-2);
+  padding-left: 36px; position: relative;
+}
+.tlBody::before {
+  content: ''; position: absolute; left: -5px; top: 5px;
+  width: 9px; height: 9px; background: var(--accent); border-radius: 50%;
+  border: 2px solid var(--bg); box-shadow: 0 0 8px var(--accent);
+}
+.tlRole   { font-family: var(--display); font-size: 26px; letter-spacing: .05em; color: var(--ink); margin-bottom: 2px; }
+.tlCompany{ font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 14px; }
+.tlBullets{ list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.tlBullets li { font-size: 13.5px; color: var(--ink-2); padding-left: 18px; position: relative; line-height: 1.65; }
+.tlBullets li::before { content: '_'; position: absolute; left: 0; color: var(--accent); font-family: var(--mono); font-size: 12px; }
+
+/* ── Resumes ── */
+.resumeSection { padding: 100px 52px; background: var(--bg-2); }
+.resumeGrid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+.resumeCard {
+  background: var(--bg-card); border: 1px solid var(--line);
+  padding: 32px 24px; text-decoration: none;
+  display: flex; flex-direction: column;
+  transition: all .25s var(--ease); position: relative; overflow: hidden;
+}
+.resumeCard::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--accent);
+  transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease);
+}
+.resumeCard:hover { background: var(--bg-3); border-color: var(--line-2); transform: translateY(-3px); }
+.resumeCard:hover::before { transform: scaleX(1); }
+.resumeDl { position: absolute; top: 20px; right: 20px; font-size: 18px; color: var(--line-2); transition: color .2s, transform .2s; }
+.resumeCard:hover .resumeDl { color: var(--accent); transform: translateY(3px); }
+.resumeTrack { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.resumeTitle { font-family: var(--display); font-size: 24px; letter-spacing: .04em; color: var(--ink); line-height: 1.1; margin-bottom: 12px; }
+.resumeCard:hover .resumeTitle { color: var(--ink); }
+.resumeTags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: auto; padding-top: 18px; }
+.resumeTag  { font-family: var(--mono); font-size: 10px; padding: 3px 8px; background: var(--bg-2); color: var(--ink-3); border-radius: 1px; border: 1px solid var(--line); transition: background .2s, color .2s; }
+.resumeCard:hover .resumeTag { background: rgba(255,255,255,.07); color: rgba(232,237,233,.5); }
+
+/* ── About ── */
+.aboutSection { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; }
+.aboutLeft { padding: 100px 64px 100px 52px; border-right: 1px solid var(--line); }
+.aboutRight { padding: 100px 52px 100px 64px; background: var(--bg-2); display: flex; flex-direction: column; justify-content: center; }
+.aboutBody { font-size: 15px; line-height: 1.85; color: var(--ink-2); margin-bottom: 28px; }
+.aboutBody strong { color: var(--ink); font-weight: 600; }
+.aboutLinks { display: flex; gap: 16px; }
+.aLink {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-2); text-decoration: none; border-bottom: 1px solid var(--line-2);
+  padding-bottom: 2px; transition: color .2s, border-color .2s;
+}
+.aLink:hover { color: var(--accent); border-color: var(--accent); }
+.eduList { display: flex; flex-direction: column; gap: 12px; }
+.eduItem { background: var(--bg-card); border: 1px solid var(--line); border-left: 2px solid var(--accent); padding: 18px 20px; }
+.eduSchool { font-family: var(--display); font-size: 19px; letter-spacing: .04em; color: var(--ink); margin-bottom: 4px; }
+.eduDegree { font-size: 13px; color: var(--ink-2); margin-bottom: 6px; }
+.eduYear   { font-family: var(--mono); font-size: 10px; color: var(--ink-3); letter-spacing: .08em; }
+.awardsBox { background: var(--accent-dim); border: 1px solid var(--accent-2); border-left: 2px solid var(--accent); padding: 18px 20px; margin-top: 12px; }
+.awardsLabel { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+.awardsText { font-size: 13px; color: var(--ink-2); line-height: 1.7; }
+.awardsText strong { color: var(--ink); }
+
+/* ── Contact ── */
+.contactSection {
+  background: var(--bg-2); text-align: center;
+  padding: 120px 52px; position: relative; overflow: hidden;
+}
+.contactSection::before {
+  content: 'AM'; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: var(--display); font-size: 380px; line-height: 1;
+  color: transparent; -webkit-text-stroke: 1px var(--line);
+  pointer-events: none; user-select: none; white-space: nowrap;
+}
+.contactHead {
+  font-family: var(--display);
+  font-size: clamp(52px, 8vw, 108px);
+  letter-spacing: .04em; line-height: .92;
+  color: var(--ink); margin-bottom: 18px; position: relative;
+}
+.contactSub { font-size: 14px; color: var(--ink-2); max-width: 440px; margin: 0 auto 48px; line-height: 1.75; position: relative; }
+.contactLinks { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; position: relative; }
+.cl { font-family: var(--mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; padding: 13px 26px; border-radius: 1px; text-decoration: none; transition: all .2s; }
+.clPrimary   { background: var(--accent); color: var(--bg); }
+.clPrimary:hover { background: #2de068; box-shadow: 0 8px 28px rgba(61,255,116,.25); }
+.clSecondary { border: 1px solid var(--line-2); color: var(--ink-2); }
+.clSecondary:hover { border-color: var(--accent); color: var(--accent); }
+.contactFooter { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--ink-3); position: relative; }
