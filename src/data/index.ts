@@ -87,7 +87,7 @@ export const projects = [
     num: '07',
     featured: false,
     status: 'wip' as const,
-    statusLabel: 'In Progress',
+    statusLabel: 'Complete',
     tags: ['mob'],
     roles: [{ label: 'Mobile', cls: 'role-mob' }],
     title: 'SELAH',
