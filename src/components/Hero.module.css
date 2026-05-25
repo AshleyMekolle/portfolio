@@ -112,3 +112,20 @@
   font-family: var(--mono); font-size: 11px;
   letter-spacing: .1em; text-transform: uppercase; color: var(--accent);
 }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; padding: 0 32px; padding-top: 100px; gap: 40px; }
+  .left { padding-bottom: 0; }
+  .right { border-left: none; border-top: 1px solid var(--line); padding-left: 0; padding-top: 32px; padding-bottom: 60px; }
+}
+@media (max-width: 640px) {
+  .hero { padding: 0 20px; padding-top: 88px; }
+  .name { font-size: clamp(56px, 14vw, 100px); }
+}
+@media (max-width: 480px) {
+  .hero { padding: 0 16px; }
+  .name { font-size: clamp(48px, 16vw, 80px); }
+  .actions { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .statsGrid { grid-template-columns: 1fr 1fr; }
+}

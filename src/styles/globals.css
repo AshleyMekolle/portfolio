@@ -105,6 +105,17 @@ body::before {
 }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  body { cursor: auto; font-size: 14px; }
+  .cursor { display: none; }
+  .divider { margin: 0 20px; }
+  .btn-primary, .btn-ghost { padding: 12px 20px; font-size: 10px; }
+}
+@media (max-width: 480px) {
+  .divider { margin: 0 16px; }
+}
+
 /* Animations */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }

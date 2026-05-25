@@ -130,3 +130,62 @@
 .clSecondary { border: 1px solid var(--line-2); color: var(--ink-2); }
 .clSecondary:hover { border-color: var(--accent); color: var(--accent); }
 .contactFooter { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--ink-3); position: relative; }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .title { font-size: clamp(40px, 6vw, 64px); margin-bottom: 40px; }
+
+  /* Skills */
+  .skillsSection { padding: 80px 32px; }
+  .skillGrid { grid-template-columns: repeat(3, 1fr); }
+
+  /* Experience */
+  .expSection { padding: 80px 32px; }
+
+  /* Resumes */
+  .resumeSection { padding: 80px 32px; }
+  .resumeGrid { grid-template-columns: repeat(2, 1fr); }
+
+  /* About */
+  .aboutSection { grid-template-columns: 1fr; }
+  .aboutLeft { padding: 80px 32px; border-right: none; border-bottom: 1px solid var(--line); }
+  .aboutRight { padding: 60px 32px 80px; }
+
+  /* Contact */
+  .contactSection { padding: 100px 32px; }
+  .contactSection::before { font-size: 260px; }
+}
+
+@media (max-width: 768px) {
+  .title { font-size: clamp(36px, 8vw, 56px); margin-bottom: 32px; }
+
+  /* Skills */
+  .skillsSection { padding: 64px 20px; }
+  .skillGrid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Experience */
+  .expSection { padding: 64px 20px; }
+  .timeline { grid-template-columns: 1fr; gap: 0; }
+  .tlDate { text-align: left; padding-top: 0; margin-bottom: 6px; }
+  .tlBody { padding-left: 20px; }
+
+  /* Resumes */
+  .resumeSection { padding: 64px 20px; }
+  .resumeGrid { grid-template-columns: 1fr; }
+
+  /* About */
+  .aboutLeft { padding: 64px 20px; }
+  .aboutRight { padding: 48px 20px 64px; }
+
+  /* Contact */
+  .contactSection { padding: 80px 20px; }
+  .contactSection::before { font-size: 160px; }
+  .contactLinks { flex-direction: column; align-items: center; }
+  .cl { width: 100%; max-width: 280px; text-align: center; box-sizing: border-box; }
+}
+
+@media (max-width: 480px) {
+  .skillGrid { grid-template-columns: 1fr; }
+  .aboutLinks { flex-direction: column; gap: 10px; }
+  .contactHead { font-size: clamp(40px, 10vw, 72px); }
+}
