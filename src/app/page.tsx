@@ -1,25 +1,21 @@
-import Navbar from '@/components/Navbar'
+import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
-import Projects from '@/components/Projects'
-import { Skills, Experience, Resumes, About, Contact } from '@/components/Sections'
-import ClientShell from '@/components/ClientShell'
+import Work from '@/components/Work'
+import { About, Contact, Experience, Expertise, Footer } from '@/components/Sections'
 
 export default function Home() {
   return (
-    <ClientShell>
-      <Navbar />
-      <main>
+    <>
+      <Nav />
+      <main id="main">
         <Hero />
-        <div className="divider" />
-        <Projects />
-        <div className="divider" />
-        <Skills />
+        <Work />
         <Experience />
-        <div className="divider" />
-        <Resumes />
+        <Expertise />
         <About />
         <Contact />
       </main>
-    </ClientShell>
+      <Footer />
+    </>
   )
 }

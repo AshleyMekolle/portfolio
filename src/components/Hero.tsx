@@ -1,49 +1,46 @@
-import Link from 'next/link'
-import styles from './Hero.module.css'
+import Voronoi from './Voronoi'
+import { site } from '@/data/site'
 
 export default function Hero() {
   return (
-    <section id="hero" className={styles.hero}>
-      <div className={styles.left}>
-        <div className={styles.tag}>
-          <span className={styles.tagLine}></span>
-          Software Engineer · Buea, Cameroon
+    <section className="hero" aria-labelledby="hero-h">
+      <div className="wrap hero__grid">
+        <div className="hero__copy">
+          <p className="mono eyebrow">AI &amp; Automation / Software Engineering</p>
+          <h1 id="hero-h" className="display-xl">
+            I build intelligent systems that do <em className="accent">useful work.</em>
+          </h1>
+          <p className="lead hero__lead">
+            I design and build intelligent applications, backend systems and automated workflows — connecting software,
+            APIs and AI to turn complex processes into working solutions.
+          </p>
+          <div className="hero__cta">
+            <a className="btn btn--solid" href="#work">
+              Explore my work <span className="arrow" aria-hidden="true">→</span>
+            </a>
+            <a className="btn" href={site.cv} download>
+              Download CV <span className="arrow" aria-hidden="true">↓</span>
+            </a>
+          </div>
         </div>
-        <h1 className={styles.name}>
-          MEKOLLE
-          <br/>
-          <span className={styles.accent}>ASHLEY</span>
-        </h1>
-        <p className={styles.role}>Full-Stack · Mobile · AI &amp; Automation</p>
-        <p className={styles.desc}>
-          Final-year Software Engineering student building production-grade systems —
-          from ML-powered healthcare platforms to AI automation agents.
-          Graduating December 2026.
-        </p>
-        <div className={styles.actions}>
-          <Link href="#projects" className="btn-primary">View Work</Link>
-          <Link href="#resumes" className="btn-ghost">Download Resume</Link>
+
+        <div className="hero__art" aria-hidden="true">
+          <div className="hero__plate">
+            <Voronoi seed={11} count={34} width={760} height={860} accent={[4, 13, 22]} dark={[8, 19, 27]} pulses={6} />
+          </div>
+          <p className="hero__legend mono">
+            <span>Fig. 1</span> A system as cells and connections — original graphic
+          </p>
         </div>
       </div>
 
-      <div className={styles.right}>
-        <div className={styles.statsGrid}>
-          {[
-            { n: '4+',  l: 'Internships'       },
-            { n: '8+',  l: 'Projects Shipped'  },
-            { n: '4',   l: 'Engineering Tracks' },
-            { n: "'26", l: 'Graduating'         },
-          ].map(s => (
-            <div key={s.l} className={styles.statBox}>
-              <div className={styles.statNum}>{s.n}</div>
-              <div className={styles.statLabel}>{s.l}</div>
-            </div>
-          ))}
-        </div>
-        <div className={styles.available}>
-          <div className={styles.dot} />
-          <span className={styles.availText}>Available for opportunities</span>
-        </div>
+      <div className="wrap">
+        <dl className="hero__facts">
+          <div><dt className="mono">Focus</dt><dd>Applied AI · Automation · Backend</dd></div>
+          <div><dt className="mono">Based in</dt><dd>Buea, Cameroon</dd></div>
+          <div><dt className="mono">Studying</dt><dd>University of Buea, graduating Dec 2026</dd></div>
+          <div><dt className="mono">Open to</dt><dd>Junior &amp; graduate engineering roles</dd></div>
+        </dl>
       </div>
     </section>
   )
