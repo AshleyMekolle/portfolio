@@ -37,7 +37,7 @@ export default function Hero() {
       <div className="wrap">
         <dl className="hero__facts">
           <div><dt className="mono">Focus</dt><dd>Applied AI · Automation · Backend</dd></div>
-          <div><dt className="mono">Based in</dt><dd>Buea, Cameroon</dd></div>
+          <div><dt className="mono">Based in</dt><dd>Kigali, Rwanda</dd></div>
           <div><dt className="mono">Studying</dt><dd>University of Buea, graduating Dec 2026</dd></div>
           <div><dt className="mono">Open to</dt><dd>Junior &amp; graduate engineering roles</dd></div>
         </dl>
