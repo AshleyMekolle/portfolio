@@ -1,132 +1,203 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import { archive, categories, caseStudies, mlProjects, type CaseStudy, type Compact } from '@/data/projects'
-import ProjectVisual from './ProjectVisual'
+import { archive, featured, furtherCases, getCase, mlProjects, type CaseStudy } from '@/data/projects'
+import FlowStrip from './FlowStrip'
 import Reveal from './Reveal'
 
-function Feature({ s, flip, first }: { s: CaseStudy; flip: boolean; first: boolean }) {
+type F = { s: CaseStudy; descriptor: string; notes: string[]; n: string }
+
+function heroImg(s: CaseStudy) {
+  if (s.hero.kind !== 'image') throw new Error(`${s.slug} needs an image hero`)
+  return s.hero
+}
+
+function Notes({ notes }: { notes: string[] }) {
   return (
-    <Reveal as="article" className={`feature ${flip ? 'feature--flip' : ''}`}>
-      <div className="feature__visual">
-        <ProjectVisual study={s} priority={first} sizes="(min-width: 1000px) 55vw, 100vw" />
+    <ul className="notes mono" aria-label="Technical notes">
+      {notes.map((t) => (
+        <li key={t}>{t}</li>
+      ))}
+    </ul>
+  )
+}
+
+function Links({ s, light = false }: { s: CaseStudy; light?: boolean }) {
+  return (
+    <div className="f__links">
+      <Link className={`btn ${light ? '' : 'btn--solid'}`} href={`/work/${s.slug}`}>
+        View case study <span className="arrow" aria-hidden="true">→</span>
+      </Link>
+      {s.links.repo && (
+        <a className="tlink" href={s.links.repo} target="_blank" rel="noopener noreferrer">
+          GitHub<span className="sr"> (opens in a new tab)</span> ↗
+        </a>
+      )}
+      {s.links.demo && (
+        <a className="tlink" href={s.links.demo} target="_blank" rel="noopener noreferrer">
+          {s.category === 'automation' ? 'Live workflow' : 'Live demo'}<span className="sr"> (opens in a new tab)</span> ↗
+        </a>
+      )}
+    </div>
+  )
+}
+
+function Title({ s, n }: { s: CaseStudy; n: string }) {
+  return (
+    <>
+      <p className="mono f__kind"><span>{n}</span> / {s.kind}</p>
+      <h3 className="f__title">
+        <Link href={`/work/${s.slug}`}>{s.name}</Link>
+      </h3>
+    </>
+  )
+}
+
+function Status({ s }: { s: CaseStudy }) {
+  return (
+    <p className="f__status">
+      <span className="tag tag--status">{s.status}</span>
+      <span className="mono muted">Updated {s.updated}</span>
+    </p>
+  )
+}
+
+/* 01 — wide screenshot left, narrow column right, giant numeral behind */
+function One({ s, descriptor, notes, n }: F) {
+  const h = heroImg(s)
+  return (
+    <Reveal as="article" className="f f1">
+      <span className="f__num" aria-hidden="true">{n}</span>
+      <figure className="f1__media">
+        <div className="shot"><Image src={h.src} alt={h.alt} width={h.w} height={h.h} priority sizes="(min-width: 1000px) 62vw, 100vw" /></div>
+        <figcaption className="figcap">{h.caption}</figcaption>
+      </figure>
+      <div className="f1__text">
+        <Title s={s} n={n} />
+        <p className="f__desc">{descriptor}</p>
+        <p className="muted f__sum">{s.tagline}</p>
+        <Notes notes={notes} />
+        <Status s={s} />
+        <Links s={s} />
       </div>
-      <div className="feature__text">
-        <p className="mono feature__num">
-          <span>{s.num}</span> <span aria-hidden="true">/</span> {s.kind}
-        </p>
-        <h3 className="display-m feature__title">
-          <Link href={`/work/${s.slug}`}>{s.name}</Link>
-        </h3>
-        <p className="feature__tag">{s.tagline}</p>
-        <p className="muted feature__sum">{s.summary}</p>
-        <p className="feature__status">
-          <span className="tag tag--status">{s.status}</span>
-          <span className="mono muted">Updated {s.updated}</span>
-        </p>
-        <ul className="taglist" aria-label="Technology">
-          {s.tech.slice(0, 7).map((t) => (
-            <li key={t} className="tag">{t}</li>
-          ))}
-        </ul>
-        <div className="feature__links">
-          <Link className="btn btn--solid" href={`/work/${s.slug}`}>
-            View case study <span className="arrow" aria-hidden="true">→</span>
-          </Link>
-          {s.links.repo && (
-            <a className="tlink" href={s.links.repo} target="_blank" rel="noopener noreferrer">
-              GitHub<span className="sr"> (opens in a new tab)</span> ↗
-            </a>
-          )}
-          {s.links.demo && (
-            <a className="tlink" href={s.links.demo} target="_blank" rel="noopener noreferrer">
-              {s.category === 'automation' ? 'Live workflow' : 'Live demo'}<span className="sr"> (opens in a new tab)</span> ↗
-            </a>
-          )}
+    </Reveal>
+  )
+}
+
+/* 02 — text left, screenshot right with a second, smaller frame overlapping it */
+function Two({ s, descriptor, notes, n }: F) {
+  const h = heroImg(s)
+  return (
+    <Reveal as="article" className="f f2">
+      <div className="f2__text">
+        <Title s={s} n={n} />
+        <p className="f__desc">{descriptor}</p>
+        <p className="muted f__sum">{s.tagline}</p>
+        <Notes notes={notes} />
+        <Status s={s} />
+        <Links s={s} />
+      </div>
+      <div className="f2__media">
+        <span className="f__num f__num--right" aria-hidden="true">{n}</span>
+        <figure className="f2__main">
+          <div className="shot"><Image src={h.src} alt={h.alt} width={h.w} height={h.h} sizes="(min-width: 1000px) 56vw, 100vw" /></div>
+          <figcaption className="figcap">{h.caption}</figcaption>
+        </figure>
+        <figure className="f2__inset">
+          <div className="shot">
+            <Image src="/work/mboko/workflow-retrieval.png" alt="The n8n retrieval and answer workflow: chat trigger, vector search, grounded answer chain." width={1113} height={388} sizes="(min-width: 1000px) 30vw, 70vw" />
+          </div>
+          <figcaption className="figcap">Screenshot — the n8n retrieval workflow.</figcaption>
+        </figure>
+      </div>
+    </Reveal>
+  )
+}
+
+/* 03 — oversized title across the page, annotations in a margin column, diagram offset right */
+function Three({ s, descriptor, notes, n }: F) {
+  const h = heroImg(s)
+  return (
+    <Reveal as="article" className="f f3">
+      <div className="f3__head">
+        <p className="mono f__kind"><span>{n}</span> / {s.kind}</p>
+        <h3 className="f3__title"><Link href={`/work/${s.slug}`}>{s.name}</Link></h3>
+      </div>
+      <aside className="f3__margin">
+        <p className="f__desc">{descriptor}</p>
+        <Notes notes={notes} />
+        <Status s={s} />
+      </aside>
+      <figure className="f3__media">
+        <div className="shot shot--paper"><Image src={h.src} alt={h.alt} width={h.w} height={h.h} sizes="(min-width: 1000px) 66vw, 100vw" /></div>
+        <figcaption className="figcap">{h.caption}</figcaption>
+      </figure>
+      <div className="f3__text">
+        <p className="muted f__sum">{s.tagline}</p>
+        <Links s={s} />
+      </div>
+    </Reveal>
+  )
+}
+
+/* 04 — inverted panel; a typographic workflow outline instead of a screenshot */
+function Four({ s, descriptor, notes, n }: F) {
+  return (
+    <Reveal as="article" className="f f4 on-night">
+      <div className="f4__top">
+        <Title s={s} n={n} />
+        <p className="f__desc">{descriptor}</p>
+      </div>
+      <FlowStrip
+        label="Order management workflow outline"
+        steps={[
+          { n: '01', label: 'Jotform', sub: 'order intake' },
+          { n: '02', label: 'Make', sub: 'scenarios' },
+          { n: '03', label: 'Airtable', sub: 'orders · customers · stock' },
+          { n: '04', label: 'Emails + dashboard', sub: 'confirm · alert · remind' },
+        ]}
+      />
+      <div className="f4__bottom">
+        <div>
+          <p className="f__sum">{s.tagline}</p>
+          <Notes notes={notes} />
+        </div>
+        <div>
+          <Status s={s} />
+          <Links s={s} light />
         </div>
       </div>
     </Reveal>
   )
 }
 
-function CompactCard({ p }: { p: Compact }) {
-  return (
-    <li className="compact">
-      <div className="compact__head">
-        <h4 className="compact__name">{p.name}</h4>
-        <span className="tag">{p.status}</span>
-      </div>
-      <p className="muted compact__blurb">{p.blurb}</p>
-      {p.note && <p className="compact__note mono">{p.note}</p>}
-      <ul className="taglist" aria-label="Technology">
-        {p.tech.map((t) => (
-          <li key={t} className="tag">{t}</li>
-        ))}
-      </ul>
-      <div className="compact__links">
-        {p.repo && (
-          <a className="tlink" href={p.repo} target="_blank" rel="noopener noreferrer">
-            Source<span className="sr"> for {p.name} (opens in a new tab)</span> ↗
-          </a>
-        )}
-        {p.demo && (
-          <a className="tlink" href={p.demo} target="_blank" rel="noopener noreferrer">
-            Live<span className="sr"> {p.name} (opens in a new tab)</span> ↗
-          </a>
-        )}
-      </div>
-    </li>
-  )
-}
-
 export default function Work() {
-  let i = 0
+  const items = featured.map((f, i) => ({ s: getCase(f.slug)!, descriptor: f.descriptor, notes: f.notes, n: String(i + 1).padStart(2, '0') }))
+  const extra = furtherCases.length + mlProjects.length + archive.length
   return (
     <section id="work" className="section work" aria-labelledby="work-h">
       <div className="wrap">
         <Reveal className="work__head">
-          <p className="mono eyebrow">Work · 7 case studies</p>
-          <h2 id="work-h" className="display-l">Selected work</h2>
-          <p className="lead">Systems I’ve designed, built and brought to life.</p>
-          <p className="muted work__note">
-            Each project has a case study with the architecture, what I built, the engineering decisions and the limits.
-            Statuses are literal: an MVP is described as an MVP.
-          </p>
+          <h2 id="work-h" className="work__h">Selected work</h2>
+          <div className="work__aside">
+            <p className="mono">(04)</p>
+            <p className="lead">Systems I’ve designed, built and brought to life.</p>
+            <p className="muted work__note">Each links to a full case study: architecture, my contribution, decisions, results and limits. Status labels are literal.</p>
+          </div>
         </Reveal>
 
-        {(['ai', 'automation', 'software'] as const).map((cid) => {
-          const cat = categories.find((c) => c.id === cid)!
-          const list = caseStudies.filter((c) => c.category === cid)
-          return (
-            <div key={cid} className="work__group" aria-labelledby={`cat-${cid}`}>
-              <Reveal className="work__cat">
-                <h3 id={`cat-${cid}`} className="mono">{cat.title}</h3>
-                <p className="muted">{cat.blurb}</p>
-              </Reveal>
-              {list.map((s) => {
-                const idx = i++
-                return <Feature key={s.slug} s={s} flip={idx % 2 === 1} first={idx === 0} />
-              })}
-            </div>
-          )
-        })}
+        <One {...items[0]} />
+        <Two {...items[1]} />
+        <Three {...items[2]} />
+        <Four {...items[3]} />
 
-        <div className="work__group" aria-labelledby="cat-ml">
-          <Reveal className="work__cat">
-            <h3 id="cat-ml" className="mono">Machine Learning</h3>
-            <p className="muted">
-              Four small projects from one repository. Each is described by what its code actually does — two of them are
-              less complete than the repository README suggests, and are labelled accordingly.
-            </p>
-          </Reveal>
-          <ul className="compact-grid">{mlProjects.map((p) => <CompactCard key={p.name} p={p} />)}</ul>
-        </div>
-
-        <div className="work__group" aria-labelledby="cat-archive">
-          <Reveal className="work__cat">
-            <h3 id="cat-archive" className="mono">Development Archive</h3>
-            <p className="muted">Smaller projects and exercises, kept for completeness. No case studies.</p>
-          </Reveal>
-          <ul className="compact-grid">{archive.map((p) => <CompactCard key={p.name} p={p} />)}</ul>
-        </div>
+        <Reveal className="work__more">
+          <p className="display-m">
+            {extra} more entries — further case studies, ML exercises and the development archive.
+          </p>
+          <Link className="btn" href="/archive">
+            Open the archive <span className="arrow" aria-hidden="true">→</span>
+          </Link>
+        </Reveal>
       </div>
     </section>
   )

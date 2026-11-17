@@ -12,6 +12,7 @@ export const site = {
 
 export const nav = [
   { label: 'Work', href: '/#work' },
+  { label: 'Archive', href: '/archive' },
   { label: 'Experience', href: '/#experience' },
   { label: 'Expertise', href: '/#expertise' },
   { label: 'About', href: '/#about' },
@@ -31,94 +32,83 @@ export const experience = [
     company: 'Teksynapse.AI',
     role: 'Software Engineering Intern',
     period: 'Sep 2025 — Mar 2026',
-    stack: ['Laravel', 'PHP', 'REST APIs', 'MVC'],
-    points: [
-      'Built backend features in Laravel and PHP, following MVC architecture.',
-      'Developed REST APIs consumed by frontend clients, keeping backend logic and presentation separate.',
-      'Worked on API integrations and data processing across backend and frontend.',
-    ],
+    line: 'Laravel and PHP backend features and REST APIs behind frontend clients; API integrations and data processing.',
+    stack: 'Laravel · PHP · REST APIs',
   },
   {
     company: 'Nexora Dynamics',
     role: 'Software Developer',
     period: 'Dec 2025 — Jul 2026',
-    stack: ['Flutter', 'FlutterFlow', 'REST APIs'],
-    points: [
-      'Built cross-platform mobile features in Flutter and FlutterFlow.',
-      'Integrated backend REST APIs into the mobile apps and kept data in sync between them.',
-      'Implemented responsive mobile layouts.',
-    ],
+    line: 'Cross-platform mobile features in Flutter and FlutterFlow, integrated with backend REST APIs.',
+    stack: 'Flutter · FlutterFlow · REST APIs',
   },
   {
     company: 'HNG Tech',
     role: 'No-Code Automation Engineer',
     period: 'Oct 2025 — Dec 2025',
-    stack: ['n8n', 'Make', 'Zapier', 'Airtable', 'Jotform'],
-    points: [
-      'Designed and deployed multi-step workflows in n8n, Zapier and Make.',
-      'Built Airtable and Jotform integrations that automate data collection and routing.',
-      'Replaced manual, repetitive processes with automated workflows.',
-    ],
+    line: 'Multi-step workflows in n8n, Make and Zapier, with Airtable and Jotform integrations that automate data collection and routing.',
+    stack: 'n8n · Make · Zapier · Airtable · Jotform',
   },
   {
     company: 'Camsol Technologies',
     role: 'Frontend Development Intern',
     period: 'Aug 2025 — Sep 2025',
-    stack: ['Next.js', 'TypeScript'],
-    points: [
-      'Built responsive, accessible UI components with Next.js and TypeScript.',
-      'Implemented reusable components that follow a design system.',
-    ],
+    line: 'Responsive, accessible and reusable UI components in Next.js and TypeScript.',
+    stack: 'Next.js · TypeScript',
   },
 ]
 
-// Skills grouped by discipline. `core` = demonstrated in featured work above;
-// `working` = used in internships / smaller projects. No expert claims.
+// Four disciplines. `core` = demonstrated in the featured work; `also` = used in
+// internships or smaller projects. No expert-level claims.
 export const expertise = [
   {
-    title: 'AI & Applied Intelligence',
-    blurb: 'Putting models to work inside real systems — and measuring whether they behave.',
-    core: ['LLM API integration (Groq)', 'Retrieval-augmented generation', 'XGBoost + SHAP explainability'],
-    working: ['Embeddings (Cohere)', 'scikit-learn', 'Model evaluation'],
-    proof: ['RepoPilot', 'Mboko Knowledge Assistant', 'Noura'],
+    title: 'Applied AI & Machine Learning',
+    line: 'Putting language models and ML models inside real systems, and measuring how they behave.',
+    core: ['LLM API integration', 'Retrieval-augmented generation', 'XGBoost', 'SHAP explainability'],
+    also: ['Embeddings', 'scikit-learn'],
+    cases: [
+      { label: 'RepoPilot', slug: 'repopilot' },
+      { label: 'Mboko', slug: 'mboko-knowledge-assistant' },
+      { label: 'Noura', slug: 'noura' },
+    ],
   },
   {
     title: 'Automation & Integrations',
-    blurb: 'Connecting systems so repetitive processes run themselves.',
+    line: 'Connecting services so repetitive processes run themselves — and recover when they fail.',
     core: ['n8n', 'Make', 'Webhooks', 'API orchestration'],
-    working: ['Zapier', 'Airtable', 'Jotform'],
-    proof: ['RepoPilot', 'Order Management', 'Creator Intelligence'],
+    also: ['Zapier', 'Airtable', 'Jotform'],
+    cases: [
+      { label: 'RepoPilot', slug: 'repopilot' },
+      { label: 'Order Management', slug: 'automated-order-management' },
+    ],
   },
   {
     title: 'Backend Engineering',
-    blurb: 'Services with clear layers, validation and sensible failure behaviour.',
-    core: ['Python', 'Django REST', 'FastAPI', 'PostgreSQL', 'REST design'],
-    working: ['Laravel', 'PHP', 'Node.js', 'MySQL', 'Firebase', 'Prisma'],
-    proof: ['Noura', 'Teksynapse.AI'],
+    line: 'Layered services with validation, clear contracts and sensible failure behaviour.',
+    core: ['Python', 'Django REST', 'FastAPI', 'PostgreSQL', 'REST API design'],
+    also: ['Laravel', 'PHP', 'Node.js', 'MySQL', 'Firebase'],
+    cases: [{ label: 'Noura', slug: 'noura' }],
   },
   {
     title: 'Frontend & Application Development',
-    blurb: 'Interfaces for the systems above — web, mobile and desktop.',
-    core: ['React', 'TypeScript', 'Next.js'],
-    working: ['JavaScript', 'React Native', 'Flutter', 'FlutterFlow', 'Tkinter'],
-    proof: ['Mboko Knowledge Assistant', 'Noura', 'MEMO', 'WeatherSphere'],
-  },
-  {
-    title: 'Developer Tools',
-    blurb: '',
-    core: ['Git', 'GitHub (webhooks, REST API, Actions)'],
-    working: ['API testing tools', 'Vercel', 'Swagger / OpenAPI docs'],
-    proof: [],
+    line: 'The interfaces for those systems — web, mobile and desktop.',
+    core: ['React', 'Next.js', 'TypeScript'],
+    also: ['JavaScript', 'React Native', 'Flutter', 'FlutterFlow', 'Tkinter'],
+    cases: [
+      { label: 'Mboko', slug: 'mboko-knowledge-assistant' },
+      { label: 'Noura', slug: 'noura' },
+    ],
   },
 ]
+export const tools = 'Git · GitHub (webhooks, REST API, Actions) · API testing tools · Vercel'
 
 export const education = {
   school: 'University of Buea',
   degree: 'Computer Engineering — Software Engineering specialisation',
   period: '2022 — expected December 2026',
   awards: [
-    { name: 'Kate Kanyi-Tometi Scholarship Fund', detail: 'Two-time awardee' },
-    { name: 'Presidential Excellency Award', detail: 'Two-time awardee' },
+    'Two-time awardee, Kate Kanyi-Tometi Scholarship Fund',
+    'Two-time awardee, Presidential Excellency Award',
   ],
   // Source: CV. The CV lists the award counts but not the years.
 }

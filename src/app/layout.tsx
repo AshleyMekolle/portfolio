@@ -1,13 +1,15 @@
 import type { Metadata, Viewport } from 'next'
-import { Fraunces, Inter, JetBrains_Mono } from 'next/font/google'
+import { Instrument_Serif, Inter, JetBrains_Mono } from 'next/font/google'
 import '@/styles/globals.css'
 import '@/styles/components.css'
+import '@/styles/home.css'
 import { site } from '@/data/site'
 
-const display = Fraunces({
+const display = Instrument_Serif({
   subsets: ['latin'],
+  weight: '400',
+  style: ['normal', 'italic'],
   variable: '--font-display',
-  axes: ['opsz'],
   display: 'swap',
 })
 const body = Inter({ subsets: ['latin'], variable: '--font-body', display: 'swap' })
@@ -41,7 +43,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#f5f4ef',
+  themeColor: '#f4f3ee',
   width: 'device-width',
   initialScale: 1,
 }

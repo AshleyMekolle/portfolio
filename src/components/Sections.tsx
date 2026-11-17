@@ -1,28 +1,27 @@
-import { cvs, education, experience, expertise, site } from '@/data/site'
+import Link from 'next/link'
+import { cvs, education, experience, expertise, site, tools } from '@/data/site'
 import Reveal from './Reveal'
 import Voronoi from './Voronoi'
 
 export function Experience() {
   return (
-    <section id="experience" className="section" aria-labelledby="exp-h">
+    <section id="experience" className="section sec" aria-labelledby="exp-h">
       <div className="wrap">
-        <Reveal className="sec-head">
-          <p className="mono eyebrow">Experience</p>
-          <h2 id="exp-h" className="display-l">Where I’ve worked</h2>
+        <Reveal className="sec__head">
+          <p className="mono sec__idx">02</p>
+          <h2 id="exp-h" className="sec__title">Experience</h2>
         </Reveal>
-        <ol className="timeline">
+        <ol className="tl">
           {experience.map((e) => (
-            <Reveal as="li" key={e.company} className="timeline__item">
-              <p className="mono timeline__period">{e.period}</p>
-              <div>
-                <h3 className="display-m timeline__role">{e.role}</h3>
-                <p className="timeline__co">{e.company}</p>
-                <ul className="timeline__points">
-                  {e.points.map((p) => <li key={p}>{p}</li>)}
-                </ul>
-                <ul className="taglist" aria-label="Technologies">
-                  {e.stack.map((t) => <li key={t} className="tag">{t}</li>)}
-                </ul>
+            <Reveal as="li" key={e.company} className="tl__row">
+              <p className="mono tl__period">{e.period}</p>
+              <div className="tl__who">
+                <h3 className="tl__co">{e.company}</h3>
+                <p className="tl__role">{e.role}</p>
+              </div>
+              <div className="tl__what">
+                <p>{e.line}</p>
+                <p className="mono muted tl__stack">{e.stack}</p>
               </div>
             </Reveal>
           ))}
@@ -34,39 +33,38 @@ export function Experience() {
 
 export function Expertise() {
   return (
-    <section id="expertise" className="section section--tint" aria-labelledby="exp2-h">
+    <section id="expertise" className="section sec sec--tint" aria-labelledby="exp2-h">
       <div className="wrap">
-        <Reveal className="sec-head">
-          <p className="mono eyebrow">Technical expertise</p>
-          <h2 id="exp2-h" className="display-l">Disciplines, not a badge wall</h2>
-          <p className="lead">
-            Grouped by the kind of engineering they support. <strong>Demonstrated</strong> means it appears in the featured
-            work above; <strong>working knowledge</strong> means I’ve used it in internships or smaller projects.
+        <Reveal className="sec__head">
+          <p className="mono sec__idx">03</p>
+          <h2 id="exp2-h" className="sec__title">Expertise</h2>
+          <p className="sec__note muted">
+            <strong>Bold</strong> is demonstrated in the featured work; the rest I have used in internships or smaller projects.
           </p>
         </Reveal>
         <div className="disc">
-          {expertise.map((d) => (
-            <Reveal as="article" key={d.title} className="disc__row">
-              <div>
-                <h3 className="display-m">{d.title}</h3>
-                {d.blurb && <p className="muted disc__blurb">{d.blurb}</p>}
-              </div>
-              <div>
-                <p className="mono disc__label">Demonstrated</p>
-                <ul className="taglist disc__core">
-                  {d.core.map((t) => <li key={t} className="tag tag--core">{t}</li>)}
-                </ul>
-                <p className="mono disc__label">Working knowledge</p>
-                <ul className="taglist">
-                  {d.working.map((t) => <li key={t} className="tag">{t}</li>)}
-                </ul>
-                {d.proof.length > 0 && (
-                  <p className="disc__proof muted">Seen in: {d.proof.join(' · ')}</p>
-                )}
-              </div>
+          {expertise.map((d, i) => (
+            <Reveal as="article" key={d.title} className="disc__col" delay={i * 60}>
+              <p className="mono disc__n">{String(i + 1).padStart(2, '0')}</p>
+              <h3 className="disc__title">{d.title}</h3>
+              <p className="muted disc__line">{d.line}</p>
+              <p className="disc__tech">
+                {d.core.map((t) => (
+                  <strong key={t}>{t}</strong>
+                ))}
+                {d.also.map((t) => (
+                  <span key={t}>{t}</span>
+                ))}
+              </p>
+              <p className="mono disc__cases">
+                {d.cases.map((c) => (
+                  <Link key={c.slug} href={`/work/${c.slug}`}>{c.label} →</Link>
+                ))}
+              </p>
             </Reveal>
           ))}
         </div>
+        <Reveal as="p" className="mono muted disc__tools">Tools — {tools}</Reveal>
       </div>
     </section>
   )
@@ -74,41 +72,32 @@ export function Expertise() {
 
 export function About() {
   return (
-    <section id="about" className="section" aria-labelledby="about-h">
+    <section id="about" className="section sec" aria-labelledby="about-h">
       <div className="wrap about">
-        <Reveal className="about__head">
-          <p className="mono eyebrow">About</p>
-          <h2 id="about-h" className="display-l">An engineer who likes the whole system.</h2>
+        <Reveal className="sec__head">
+          <p className="mono sec__idx">04</p>
+          <h2 id="about-h" className="sec__title">About</h2>
         </Reveal>
-        <Reveal className="about__body" delay={80}>
-          <p>
-            I’m a software engineer interested in practical systems and intelligent automation. I like working across the
-            layers: understanding the problem, designing the solution, building the backend services, integrating APIs and
-            AI capabilities, automating what is repetitive, and delivering something people can actually use.
+        <Reveal className="about__body" delay={60}>
+          <p className="about__lead">
+            I’m a software engineer who likes the whole system: understanding the problem, designing the solution, building
+            the backend, integrating APIs and AI, and automating what is repetitive.
           </p>
-          <p>
+          <p className="muted">
             My experience spans a Laravel backend internship, automation engineering with n8n, Make and Zapier, and
-            cross-platform app development in Flutter. My own projects put language models and machine learning behind
-            real interfaces — an LLM that triages GitHub issues, a retrieval assistant that answers only from its
-            documents, and an explainable risk model.
-          </p>
-          <p>
-            I try to be exact about what a system does and what it does not. That is why each case study here lists its
-            limitations and its unfinished work as plainly as its results.
+            cross-platform apps in Flutter. My own projects put language models and machine learning behind real
+            interfaces — and I try to say plainly what each one does and does not do.
           </p>
         </Reveal>
-
-        <Reveal className="edu" delay={120}>
-          <p className="mono eyebrow">Education &amp; recognition</p>
-          <h3 className="edu__school">{education.school}</h3>
+        <Reveal as="aside" className="edu" delay={120} aria-label="Education and recognition">
+          <p className="mono edu__label">Education</p>
+          <p className="edu__school">{education.school}</p>
           <p>{education.degree}</p>
           <p className="mono muted">{education.period}</p>
-          <ul className="edu__awards">
+          <p className="mono edu__label edu__label--2">Recognition</p>
+          <ul>
             {education.awards.map((a) => (
-              <li key={a.name}>
-                <span>{a.name}</span>
-                <span className="mono muted">{a.detail}</span>
-              </li>
+              <li key={a}>{a}</li>
             ))}
           </ul>
         </Reveal>
@@ -121,42 +110,33 @@ export function Contact() {
   return (
     <section id="contact" className="contact on-night" aria-labelledby="contact-h">
       <div className="contact__art" aria-hidden="true">
-        <Voronoi seed={5} count={28} width={900} height={700} tone="night" accent={[5, 17]} pulses={4} />
+        <Voronoi seed={5} count={24} width={1000} height={700} tone="night" plain accent={[5]} pulses={3} />
       </div>
       <div className="wrap contact__inner">
         <Reveal>
-          <p className="mono eyebrow">Contact</p>
-          <h2 id="contact-h" className="display-xl">Have a problem worth solving?</h2>
+          <p className="mono contact__idx">05 — Contact</p>
+          <h2 id="contact-h" className="contact__title">
+            Have a problem <em className="accent">worth solving?</em>
+          </h2>
           <p className="lead contact__lead">
             I’m interested in opportunities where software engineering, applied AI and automation can make a practical difference.
           </p>
-          <div className="contact__cta">
-            <a className="btn btn--solid" href={`mailto:${site.email}`}>
-              Email me <span className="arrow" aria-hidden="true">→</span>
-            </a>
-            <a className="btn" href={site.cv} download>
-              Download CV <span className="arrow" aria-hidden="true">↓</span>
-            </a>
-          </div>
+          <a className="contact__mail" href={`mailto:${site.email}`}>{site.email}</a>
         </Reveal>
 
-        <Reveal className="contact__list" delay={100}>
-          <dl>
-            <div><dt className="mono">Email</dt><dd><a href={`mailto:${site.email}`}>{site.email}</a></dd></div>
-            <div><dt className="mono">GitHub</dt><dd><a href={site.github} target="_blank" rel="noopener noreferrer">github.com/AshleyMekolle<span className="sr"> (opens in a new tab)</span></a></dd></div>
-            <div><dt className="mono">LinkedIn</dt><dd><a href={site.linkedin} target="_blank" rel="noopener noreferrer">Ashley Mekolle<span className="sr"> (opens in a new tab)</span></a></dd></div>
-          </dl>
-          <div className="contact__cvs">
-            <p className="mono">CV versions</p>
-            <ul>
-              {cvs.map((c) => (
-                <li key={c.href}>
-                  <a href={c.href} download>{c.label}</a>
-                  <span>{c.note}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <Reveal className="contact__grid" delay={80}>
+          <ul className="contact__links">
+            <li><a href={`mailto:${site.email}`}>Email <span aria-hidden="true">→</span></a></li>
+            <li><a href={site.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span className="sr"> (opens in a new tab)</span></a></li>
+            <li><a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span><span className="sr"> (opens in a new tab)</span></a></li>
+            <li><a href={site.cv} download>Curriculum vitae <span aria-hidden="true">↓</span></a></li>
+          </ul>
+          <p className="mono contact__cvs">
+            Other CVs:{' '}
+            {cvs.slice(1).map((c, i) => (
+              <span key={c.href}>{i > 0 && ' · '}<a href={c.href} download>{c.label}</a></span>
+            ))}
+          </p>
         </Reveal>
       </div>
     </section>
@@ -167,8 +147,8 @@ export function Footer() {
   return (
     <footer className="foot">
       <div className="wrap foot__inner">
-        <p className="mono">© {new Date().getFullYear()} Mekolle Ashley</p>
-        <p className="mono muted">AI · Automation · Software engineering</p>
+        <p className="mono">© {new Date().getFullYear()} Mekolle Ashley · Kigali, Rwanda</p>
+        <p className="mono"><Link href="/archive">Archive</Link></p>
         <p className="mono"><a href="#main">Back to top ↑</a></p>
       </div>
     </footer>

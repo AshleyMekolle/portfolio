@@ -7,13 +7,13 @@ const GY = 30
 const PAD = 16
 
 const palette: Record<NonNullable<DiagramNode['kind']>, { fill: string; stroke: string }> = {
-  source: { fill: '#f5f4ef', stroke: '#171717' },
-  process: { fill: '#ffffff', stroke: '#171717' },
-  ai: { fill: '#f0d9cc', stroke: '#b4441c' },
-  store: { fill: '#e5e3dc', stroke: '#171717' },
+  source: { fill: '#f4f3ee', stroke: '#141513' },
+  process: { fill: '#ffffff', stroke: '#141513' },
+  ai: { fill: '#dde6de', stroke: '#3d5a47' },
+  store: { fill: '#e6e5dc', stroke: '#141513' },
   out: { fill: '#ffffff', stroke: '#77766f' },
-  ui: { fill: '#171717', stroke: '#171717' },
-  aux: { fill: '#f5f4ef', stroke: '#77766f' },
+  ui: { fill: '#141513', stroke: '#141513' },
+  aux: { fill: '#f4f3ee', stroke: '#77766f' },
 }
 
 function wrap(text: string, max: number): string[] {
@@ -70,16 +70,16 @@ export default function Diagram({ nodes, edges, title, caption }: { nodes: Diagr
         <svg viewBox={`0 0 ${width} ${height}`} style={{ minWidth: Math.round(width * 0.8) }} role="img" aria-label={`${title}. ${nodes.map((n) => n.label).join(', ')}.`}>
           <defs>
             <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0 1 L9 5 L0 9 z" fill="#171717" />
+              <path d="M0 1 L9 5 L0 9 z" fill="#141513" />
             </marker>
           </defs>
           {paths.map(({ d, e, i }) => (
-            <path key={i} d={d} fill="none" stroke="#171717" strokeWidth={1.4} strokeDasharray={e.dashed ? '5 5' : undefined} markerEnd="url(#arrow)" opacity={0.8} />
+            <path key={i} d={d} fill="none" stroke="#141513" strokeWidth={1.4} strokeDasharray={e.dashed ? '5 5' : undefined} markerEnd="url(#arrow)" opacity={0.8} />
           ))}
           {nodes.map((n) => {
             const p = pos(n)
             const c = palette[n.kind ?? 'process']
-            const ink = n.kind === 'ui' ? '#f5f4ef' : '#171717'
+            const ink = n.kind === 'ui' ? '#f4f3ee' : '#141513'
             const sub = n.kind === 'ui' ? '#cfccc2' : '#55544e'
             return (
               <g key={n.id}>
@@ -106,7 +106,7 @@ export default function Diagram({ nodes, edges, title, caption }: { nodes: Diagr
           {paths.map(({ lx, ly, e, i }) =>
             e.label ? (
               <g key={`l${i}`}>
-                <rect x={lx - e.label.length * 3.1 - 5} y={ly - 9} width={e.label.length * 6.2 + 10} height={17} fill="#f5f4ef" opacity={0.95} rx={2} />
+                <rect x={lx - e.label.length * 3.1 - 5} y={ly - 9} width={e.label.length * 6.2 + 10} height={17} fill="#f4f3ee" opacity={0.95} rx={2} />
                 <text x={lx} y={ly + 3.5} fontSize={10.5} textAnchor="middle" fill="#3b3a36" fontFamily="var(--f-mono)">
                   {e.label}
                 </text>

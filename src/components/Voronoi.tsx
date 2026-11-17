@@ -82,20 +82,21 @@ type Props = {
   tone?: 'light' | 'night'
   pulses?: number // animated data pulses along edges
   nodes?: boolean
+  plain?: boolean // outline only, no cell fills
   label?: string
   className?: string
 }
 
 export default function Voronoi({
   seed = 7, count = 30, width = 800, height = 800,
-  accent = [], dark = [], tone = 'light', pulses = 0, nodes = true, label, className,
+  accent = [], dark = [], tone = 'light', pulses = 0, nodes = true, plain = false, label, className,
 }: Props) {
   const { pts, polys, edges } = buildVoronoi(seed, count, width, height)
-  const line = tone === 'night' ? '#4a4741' : '#cfccc2'
-  const fillBase = tone === 'night' ? '#1c1b19' : '#efede6'
-  const nodeFill = tone === 'night' ? '#ece9e0' : '#171717'
-  const accentFill = tone === 'night' ? '#d9774a' : '#b4441c'
-  const darkFill = tone === 'night' ? '#2b2926' : '#171717'
+  const line = tone === 'night' ? '#3a463b' : '#c3c1b6'
+  const fillBase = plain ? 'none' : tone === 'night' ? '#171c17' : '#ecebe4'
+  const nodeFill = tone === 'night' ? '#e9ece3' : '#141513'
+  const accentFill = tone === 'night' ? '#6f9a7d' : '#3d5a47'
+  const darkFill = tone === 'night' ? '#222a22' : '#141513'
   const pulsePaths = edges.slice(0, pulses).map(([a, b]) => `M${pts[a][0].toFixed(1)} ${pts[a][1].toFixed(1)} L${pts[b][0].toFixed(1)} ${pts[b][1].toFixed(1)}`)
 
   return (

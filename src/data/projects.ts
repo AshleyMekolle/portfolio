@@ -892,6 +892,33 @@ if (data.cod !== 200) {
 }
 
 export const caseStudies: CaseStudy[] = [repopilot, mboko, noura, orders, creators, memo, weather]
+
+// The four projects featured on the homepage, with restrained technical annotations.
+// Every annotation restates something verified in the case study.
+export const featured: { slug: string; descriptor: string; notes: string[] }[] = [
+  {
+    slug: 'repopilot',
+    descriptor: 'AI-powered GitHub issue triage and CI automation.',
+    notes: ['Signed webhooks · HMAC-SHA256', 'gpt-oss-120b on Groq, via n8n', '20-issue evaluation: 100% category · 95% priority'],
+  },
+  {
+    slug: 'mboko-knowledge-assistant',
+    descriptor: 'Retrieval-augmented knowledge assistant.',
+    notes: ['20 curated documents', 'Cohere embeddings → Supabase pgvector · top 5', 'Citations and published evaluation: planned'],
+  },
+  {
+    slug: 'noura',
+    descriptor: 'Explainable machine learning and maternal health platform.',
+    notes: ['XGBoost + SHAP · 14 features', 'FastAPI model service behind a Django API', 'Not clinically validated'],
+  },
+  {
+    slug: 'automated-order-management',
+    descriptor: 'End-to-end business process automation.',
+    notes: ['Jotform → Make → Airtable', 'Five automated email flows', 'Live public scenario and dashboard'],
+  },
+]
+export const featuredSlugs = featured.map((f) => f.slug)
+export const furtherCases = caseStudies.filter((c) => !featuredSlugs.includes(c.slug))
 export const getCase = (slug: string) => caseStudies.find((c) => c.slug === slug)
 
 /* ─────────── Compact entries (no case study) ─────────── */
