@@ -15,7 +15,7 @@ export default function FlowStrip({ steps, label }: { steps: Step[]; label: stri
           </li>
         ))}
       </ol>
-      <figcaption className="figcap strip__cap">Workflow outline drawn from the project description — not a screenshot.</figcaption>
+      <figcaption className="figcap strip__cap">Workflow outline drawn from the project description, not a screenshot.</figcaption>
     </figure>
   )
 }

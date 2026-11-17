@@ -1,5 +1,5 @@
 /* ───────────────────────────────────────────────────────────
-   MEKOLLE ASHLEY — design tokens & base
+   MEKOLLE ASHLEY - design tokens & base
    Swiss-editorial: warm paper, near-black ink, one muted green.
    ─────────────────────────────────────────────────────────── */
 :root {
@@ -10,7 +10,7 @@
   --ink: #141513;
   --ink-2: #3a3b36;
   --muted: #62645c; /* 5.4:1 on paper */
-  --accent: #3d5a47; /* muted green — 6.9:1 on paper */
+  --accent: #3d5a47; /* muted green - 6.9:1 on paper */
   --accent-ink: #2e4637;
   --accent-soft: #dde6de;
   --night: #0f130f;
@@ -44,7 +44,7 @@ body {
 }
 img, svg { max-width: 100%; display: block; }
 a { color: inherit; }
-h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 400; margin: 0; letter-spacing: -0.02em; line-height: 1.02; text-wrap: balance; }
+h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 500; margin: 0; letter-spacing: -0.035em; line-height: 1.05; text-wrap: balance; }
 p { margin: 0; text-wrap: pretty; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 code, pre { font-family: var(--f-mono); }
@@ -68,15 +68,15 @@ code, pre { font-family: var(--f-mono); }
 .mono { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
 .eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); }
 .eyebrow::before { content: ''; width: 18px; height: 1px; background: currentColor; }
-.display-xl { font-size: clamp(2.9rem, 7.6vw, 6.6rem); line-height: 0.96; letter-spacing: -0.035em; }
-.display-l { font-size: clamp(2.4rem, 5.4vw, 4.8rem); letter-spacing: -0.03em; line-height: 0.98; }
-.display-m { font-size: clamp(1.8rem, 3vw, 2.7rem); line-height: 1; }
+.display-xl { font-size: clamp(2.2rem, 5vw, 4.2rem); line-height: 1; letter-spacing: -0.04em; }
+.display-l { font-size: clamp(1.9rem, 3.6vw, 3rem); letter-spacing: -0.035em; line-height: 1.02; }
+.display-m { font-size: clamp(1.4rem, 2.1vw, 1.9rem); line-height: 1.1; }
 .lead { font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.55; color: var(--ink-2); max-width: 54ch; }
 .muted { color: var(--muted); }
-em.accent, .accent { color: var(--accent); font-style: italic; }
+em.accent, .accent { color: var(--accent); font-style: normal; }
 .on-night em.accent { color: var(--accent-night); }
 
-/* buttons & links — square, Swiss */
+/* buttons & links - square, Swiss */
 .btn {
   display: inline-flex; align-items: center; justify-content: space-between; gap: 28px;
   font: 500 13px var(--f-mono); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
@@ -106,7 +106,7 @@ em.accent, .accent { color: var(--accent); font-style: italic; }
 }
 .tag--status { border-color: var(--accent); color: var(--accent-ink); background: var(--accent-soft); }
 
-/* motion — gentle entrance, honours reduced motion */
+/* motion - gentle entrance, honours reduced motion */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
 .reveal.in { opacity: 1; transform: none; }
 

@@ -9,7 +9,7 @@ export const categories: { id: CategoryId; title: string; blurb: string }[] = [
   { id: 'automation', title: 'Automation & Integrations', blurb: 'Workflows that move data between services without anyone babysitting them.' },
   { id: 'software', title: 'Software Engineering', blurb: 'Applications built end to end, from state and storage to the interface.' },
   { id: 'ml', title: 'Machine Learning', blurb: 'Smaller applied-ML exercises, described exactly as implemented.' },
-  { id: 'archive', title: 'Development Archive', blurb: 'Smaller projects worth keeping — no case studies.' },
+  { id: 'archive', title: 'Development Archive', blurb: 'Smaller projects worth keeping, without case studies.' },
 ]
 
 export type Status = 'Prototype' | 'MVP' | 'In development' | 'Deployed' | 'Production-ready'
@@ -64,9 +64,9 @@ const repopilot: CaseStudy = {
   name: 'RepoPilot',
   category: 'ai',
   kind: 'AI + workflow automation',
-  tagline: 'GitHub issue triage and CI alerts, driven by signed webhooks and an LLM.',
+  tagline: 'Labels new GitHub issues with an LLM and sends CI failures to Telegram.',
   summary:
-    'An event-driven GitHub automation system built in n8n. It verifies signed GitHub webhooks, uses an LLM to classify new issues and apply labels, catches failed CI runs, and delivers every alert to Telegram — with tracked delivery, automatic retries and a central error workflow.',
+    'An n8n system that receives signed GitHub webhooks, labels new issues using an LLM, records failed CI runs and sends the alerts to Telegram. Failed deliveries are retried, and a separate workflow reports any errors in the system itself.',
   domain: 'Developer operations · repository maintenance',
   status: 'MVP',
   statusNote: 'Working end to end on n8n Cloud. Several hardening items are still open on the roadmap.',
@@ -79,7 +79,7 @@ const repopilot: CaseStudy = {
     w: 943,
     h: 445,
     alt: 'The RP-02 Issue Triage sub-workflow in the n8n editor, showing the Groq triage chain, structured output parser and GitHub label request.',
-    caption: 'Screenshot — the RP-02 Issue Triage sub-workflow in n8n.',
+    caption: 'Screenshot: the RP-02 Issue Triage sub-workflow in n8n.',
   },
   problem: [
     'Maintainers of a repository have to read every new issue, decide what kind of issue it is and how urgent it is, label it, and separately notice when CI starts failing. That work is repetitive, easy to postpone, and easy to get wrong when a serious report is buried among minor ones.',
@@ -143,7 +143,7 @@ const repopilot: CaseStudy = {
     { area: 'API integration', text: 'GitHub webhook intake with raw-body signature verification, GitHub REST API calls for labels, Telegram Bot API for delivery.' },
     { area: 'Data processing', text: 'Payload normalisation into one consistent event shape; idempotent Data Table writes keyed by run ID.' },
     { area: 'Testing & evaluation', text: 'Built the 20-issue labelled dataset, the n8n evaluation workflow and a Python scorer, and wrote up the failure analysis.' },
-    { area: 'Deployment', text: 'Runs on n8n Cloud; setup, credentials and import order are documented in the README. Backend/frontend code: none — this project is workflow-first.' },
+    { area: 'Deployment', text: 'Runs on n8n Cloud; setup, credentials and import order are documented in the README. Backend/frontend code: none; this project is workflow-first.' },
   ],
   decisions: [
     { title: 'Verify the signature on the raw body', body: 'GitHub signs the exact bytes it sends. Re-serialising parsed JSON does not reproduce them, so the Code node computes HMAC-SHA256 over the raw body and compares it to X-Hub-Signature-256 with a timing-safe comparison.' },
@@ -154,25 +154,25 @@ const repopilot: CaseStudy = {
     { title: 'Stop error loops', body: 'If RP-ERR is triggered by a failure inside RP-05, the alert is skipped. Otherwise a broken notifier would try to report itself forever.' },
   ],
   evidence: [
-    { type: 'image', src: '/work/repopilot/rp-01-event-intake-router.png', w: 840, h: 390, alt: 'RP-01 workflow in n8n', caption: 'RP-01 Event Intake & Router — signature check, 202/401 responses, normalisation and routing.' },
-    { type: 'image', src: '/work/repopilot/rp-05-notification-service.png', w: 751, h: 430, alt: 'RP-05 workflow in n8n', caption: 'RP-05 Notification Service — one shared sender for every alert.' },
+    { type: 'image', src: '/work/repopilot/rp-01-event-intake-router.png', w: 840, h: 390, alt: 'RP-01 workflow in n8n', caption: 'RP-01 Event Intake & Router: signature check, 202/401 responses, normalisation and routing.' },
+    { type: 'image', src: '/work/repopilot/rp-05-notification-service.png', w: 751, h: 430, alt: 'RP-05 workflow in n8n', caption: 'RP-05 Notification Service: one shared sender for every alert.' },
     { type: 'image', src: '/work/repopilot/telegram-alert.png', w: 819, h: 655, alt: 'A RepoPilot triage alert as shown in Telegram', caption: 'A triage alert as received in Telegram.' },
     {
       type: 'table',
-      title: 'AI evaluation — 20 labelled issues, openai/gpt-oss-120b on Groq, temperature 0, run 17 Oct 2026',
+      title: 'AI evaluation: 20 labelled issues, openai/gpt-oss-120b on Groq, temperature 0, run 17 Oct 2026',
       headers: ['Metric', 'Result'],
       rows: [
         ['Category accuracy', '100% (20 / 20)'],
         ['Priority accuracy', '95% (19 / 20)'],
         ['Category and priority both correct', '95% (19 / 20)'],
-        ['High-priority accuracy', '80% (4 / 5) — the one miss'],
+        ['High-priority accuracy', '80% (4 / 5): the one miss'],
       ],
       source: 'RepoPilot/evaluations/README.md',
     },
     { type: 'image', src: '/work/repopilot/priority-accuracy.png', w: 1185, h: 753, alt: 'Bar chart of priority accuracy by class: high 80%, medium 100%, low 100%', caption: 'Priority accuracy by class. The single error was a data-loss bug rated medium instead of high.', wide: true },
     {
       type: 'code',
-      title: 'Scoring — evaluations/evaluate.py (excerpt)',
+      title: 'Scoring: evaluations/evaluate.py (excerpt)',
       lang: 'python',
       code: `category_ok = (
     prediction.get("predicted_category")
@@ -198,7 +198,7 @@ both_correct += category_ok and priority_ok`,
       'A prompt instruction that helps one decision (be conservative on category) can quietly bias another (priority).',
     ],
     limitations: [
-      'Only 20 evaluation issues, 12 of them low priority and 5 high — each issue moves accuracy by 5 points.',
+      'Only 20 evaluation issues, 12 of them low priority and 5 high, so each issue moves accuracy by 5 points.',
       'One labeller, so borderline priorities are partly subjective.',
       'Exact-match scoring: one priority level off counts as fully wrong.',
       'The webhook secret is currently set inside a Code node rather than n8n Variables.',
@@ -218,9 +218,9 @@ const mboko: CaseStudy = {
   name: 'Mboko Knowledge Assistant',
   category: 'ai',
   kind: 'Retrieval-augmented generation',
-  tagline: 'An internal assistant that answers only from a curated knowledge base — and says so when it cannot.',
+  tagline: 'A chat assistant that answers from 20 company documents, and says so when it can’t.',
   summary:
-    'A retrieval-augmented assistant for a fictional Cameroonian media company. Twenty interlinked policy documents are embedded into Supabase pgvector; a Next.js chat interface sends questions through n8n, which retrieves the five closest passages and has a Groq-hosted model answer from them alone.',
+    'A retrieval assistant for a fictional Cameroonian media company. Twenty policy documents are embedded into Supabase pgvector. A Next.js chat page sends each question to n8n, which retrieves the five closest passages and has a Groq model answer from them only.',
   domain: 'Internal knowledge management',
   status: 'MVP',
   statusNote: 'Live and working. Citations, published evaluation results, authentication and sustainable hosting are not done yet.',
@@ -236,12 +236,12 @@ const mboko: CaseStudy = {
     w: 1812,
     h: 880,
     alt: 'The Mboko Knowledge Assistant chat interface with the headline “Your company’s knowledge, within reach.” and a question box.',
-    caption: 'Screenshot — the deployed chat interface.',
+    caption: 'Screenshot: the deployed chat interface.',
   },
   problem: [
     'In any organisation, answers live in policies, handbooks and procedures that nobody wants to search: how many days of leave, who approves a video before publication, how to claim an expense. Finding the right document, then the right paragraph, is slow.',
     'The people who feel this are employees asking routine questions and the colleagues who get interrupted to answer them. A general-purpose chatbot is not a fix, because it will happily invent a plausible policy.',
-    'The company, its people and its documents are entirely fictional — created so the system could be built and tested against a realistic, fully documented corpus. No real users or business results are claimed.',
+    'The company, its people and its documents are entirely fictional. I created them so the system could be built and tested against a realistic, fully documented corpus. No real users or business results are claimed.',
   ],
   solution: {
     intro:
@@ -251,13 +251,13 @@ const mboko: CaseStudy = {
       'A 47-question evaluation set with expected answers and supporting document IDs (including 9 deliberately unanswerable questions).',
       'n8n ingestion: lists documents in the GitHub repo, extracts text, embeds it with Cohere multilingual embeddings and inserts into Supabase pgvector (manual trigger).',
       'n8n retrieval and answer workflow: embeds the question, retrieves the top 5 passages, and generates a grounded answer on Groq.',
-      'A fixed fallback — “I couldn’t find that information in the Mboko knowledge base.” — when the passages do not contain the answer.',
+      'When the passages do not contain the answer, it replies with a fixed sentence: “I couldn’t find that information in the Mboko knowledge base.”',
       'Next.js chat interface on Vercel with starter questions, Markdown rendering and a server-side proxy route that validates input and keeps the webhook URL out of the browser.',
       'Both n8n workflow exports committed to the repository.',
     ],
     planned: [
       'Source citations (chunks do not yet store file path or document ID).',
-      'Running the evaluation and publishing scores — the 47-question set exists, but no results are published.',
+      'Running the evaluation and publishing scores. The 47-question set exists, but no results are published.',
       'Automatic, idempotent ingestion when documents change (today it is manual and insert-only).',
       'Conversation memory for follow-up questions (each question is answered independently).',
       'Webhook authentication and rate limiting.',
@@ -304,22 +304,22 @@ const mboko: CaseStudy = {
     { title: 'Stack changed from the original plan', body: 'The first roadmap proposed Python, FastAPI and Docker. The shipped system uses n8n, Supabase, Cohere, Groq and Next.js; the README roadmap was rewritten to match what was actually built.' },
   ],
   evidence: [
-    { type: 'image', src: '/work/mboko/mboko-knowledge-assistant-2.png', w: 1828, h: 861, alt: 'The Mboko Knowledge Assistant interface, second screen', caption: 'Screenshot — second view of the deployed interface.', wide: true },
-    { type: 'image', src: '/work/mboko/workflow-ingestion.png', w: 1084, h: 292, alt: 'n8n ingestion workflow', caption: 'n8n workflow 1 — document ingestion.', wide: true },
-    { type: 'image', src: '/work/mboko/workflow-retrieval.png', w: 1113, h: 388, alt: 'n8n retrieval and answer workflow', caption: 'n8n workflow 2 — retrieval and answer generation.', wide: true },
+    { type: 'image', src: '/work/mboko/mboko-knowledge-assistant-2.png', w: 1828, h: 861, alt: 'The Mboko Knowledge Assistant interface, second screen', caption: 'Screenshot: second view of the deployed interface.', wide: true },
+    { type: 'image', src: '/work/mboko/workflow-ingestion.png', w: 1084, h: 292, alt: 'n8n ingestion workflow', caption: 'n8n workflow 1: document ingestion.', wide: true },
+    { type: 'image', src: '/work/mboko/workflow-retrieval.png', w: 1113, h: 388, alt: 'n8n retrieval and answer workflow', caption: 'n8n workflow 2: retrieval and answer generation.', wide: true },
     {
       type: 'table',
-      title: 'Evaluation set — 47 questions (written; not yet run)',
+      title: 'Evaluation set: 47 questions (written; not yet run)',
       headers: ['Category', 'Questions'],
       rows: [
         ['Policy and procedure', '12'], ['Direct fact', '10'], ['Multi-document', '7'],
         ['Register record', '6'], ['Approval threshold', '3'], ['Unanswerable', '9'],
       ],
-      source: 'mboko-knowledge-assistant/README.md — no results are published for this set.',
+      source: 'mboko-knowledge-assistant/README.md: no results are published for this set.',
     },
     {
       type: 'code',
-      title: 'Input validation in the chat proxy — src/app/api/chat/route.ts (excerpt)',
+      title: 'Input validation in the chat proxy: src/app/api/chat/route.ts (excerpt)',
       lang: 'typescript',
       code: `const { sessionId, message } = (body ?? {}) as Record<string, unknown>;
 if (typeof sessionId !== "string" || !/^[\\w-]{8,100}$/.test(sessionId)) {
@@ -340,7 +340,7 @@ if (message.length > MAX_MESSAGE_LENGTH) {
     ],
     learned: [
       'Grounding is mostly an instruction-and-evaluation problem: a fixed fallback plus a deliberate set of unanswerable questions makes “does it make things up?” testable.',
-      'Without chunk metadata, answers cannot cite sources — a design gap that is cheap to avoid at ingestion time and awkward to retrofit.',
+      'Without chunk metadata, answers cannot cite sources. That gap is cheap to avoid at ingestion time and awkward to retrofit.',
     ],
     limitations: [
       'No citations, no conversation memory, no published evaluation results.',
@@ -364,9 +364,9 @@ const noura: CaseStudy = {
   name: 'Noura',
   category: 'ai',
   kind: 'Applied ML · full-stack',
-  tagline: 'A maternal health platform that pairs an explainable risk model with a layered Django API.',
+  tagline: 'An explainable risk model behind a Django API, with web and mobile apps.',
   summary:
-    'The capstone for my degree: a maternal health companion for Cameroon. An XGBoost model trained on DHS Cameroon 2018 survey data returns a risk band with SHAP explanations through a FastAPI microservice; a Django REST backend, a React Native app and a React web dashboard sit around it. It is a technical project, not a clinically validated diagnostic tool.',
+    'My degree capstone: a maternal health app for Cameroon. An XGBoost model trained on DHS Cameroon 2018 survey data returns a risk band and the top SHAP factors through a FastAPI service. A Django REST backend, a React Native app and a React dashboard sit around it. It is a technical project and has not been clinically validated.',
   domain: 'Maternal health · applied machine learning',
   status: 'In development',
   statusNote: 'Backend, ML service, mobile app and web dashboard all exist in the repository. Not clinically validated and not for real patients. The repository README is out of date and still lists the apps as “planned”.',
@@ -386,7 +386,7 @@ const noura: CaseStudy = {
   },
   problem: [
     'Pregnancy can be isolating and risky, particularly where antenatal care is inconsistent and clinics are hard to find. A pregnant woman benefits from understanding her own risk factors, and a health worker benefits from seeing which patients to prioritise.',
-    'Noura is a student engineering project exploring that idea: a short health form produces a Low / Medium / High reading, a plain-language explanation of what drove it, and nearby clinics when the reading is high. It makes no claim about patients or outcomes — no real-world deployment or clinical testing has taken place.',
+    'Noura is a student engineering project exploring that idea: a short health form produces a Low / Medium / High reading, a plain-language explanation of what drove it, and nearby clinics when the reading is high. It makes no claim about patients or outcomes. No real-world deployment or clinical testing has taken place.',
     'Risk labels were engineered from survey indicators using WHO-based rules (see Technical decisions). They are not clinical outcomes, which is why the model must not be read as diagnostic.',
   ],
   solution: {
@@ -403,7 +403,7 @@ const noura: CaseStudy = {
       'Six notebooks documenting data cleaning, label engineering, EDA, feature engineering, training and SHAP analysis.',
     ],
     planned: [
-      'Clinical validation — none has been done.',
+      'Clinical validation: none has been done.',
       'Improving recall on the Medium class (see evidence).',
       'Updating the repository README to reflect the apps that now exist.',
     ],
@@ -444,28 +444,28 @@ const noura: CaseStudy = {
     { title: 'Thresholded risk bands', body: 'Served logic: High if P(high) ≥ 0.65; Medium if P(medium) ≥ 0.40 or P(high) ≥ 0.35; otherwise Low. The thresholds live in the model config, not the interface.' },
     { title: 'Fail soft', body: 'If the ML service is unreachable the backend applies a rule-based screener built from the same WHO-based rules used for labelling, and records the model version as fallback-v1.' },
     { title: 'Four-layer backend', body: 'Views parse requests and call services; services hold business logic; repositories hold all database queries; models only define schema. Each layer can be tested independently.' },
-    { title: 'Anonymity in the data model', body: 'Registration creates two unjoined records — credentials, and alias plus health data. The community only ever sees an alias.' },
+    { title: 'Anonymity in the data model', body: 'Registration creates two unjoined records: credentials, and alias plus health data. The community only ever sees an alias.' },
     { title: 'Labels are rule-engineered', body: 'Risk labels come from a labelling function over survey indicators (for example no antenatal visits, prior pregnancy loss, age and parity combined with protective factors), not from clinical outcomes. This is why the project makes no diagnostic claim.' },
   ],
   evidence: [
     {
       type: 'table',
-      title: 'Recorded model performance — xgb-v2.0, DHS Cameroon 2018 (held-out test set, n = 1,293; training n = 5,170)',
+      title: 'Recorded model performance: xgb-v2.0, DHS Cameroon 2018 (held-out test set, n = 1,293; training n = 5,170)',
       headers: ['Metric', 'Value'],
       rows: [
         ['Overall accuracy', '62.6%'],
-        ['Recall — Low', '87.6%'],
-        ['Recall — Medium', '38.0%'],
-        ['Recall — High', '81.2%'],
+        ['Recall: Low', '87.6%'],
+        ['Recall: Medium', '38.0%'],
+        ['Recall: High', '81.2%'],
       ],
       source: 'noura/ml_service/models/model_config.json',
     },
     { type: 'image', src: '/work/noura/model_evaluation.png', w: 1931, h: 770, alt: 'Model evaluation plots from the Noura repository', caption: 'Model evaluation figure from the repository.', wide: true },
-    { type: 'image', src: '/work/noura/shap_global_importance.png', w: 1473, h: 1030, alt: 'SHAP global feature importance chart', caption: 'SHAP — global feature importance.' },
-    { type: 'image', src: '/work/noura/shap_beeswarm_high_risk.png', w: 1628, h: 1394, alt: 'SHAP beeswarm plot for the high-risk class', caption: 'SHAP — beeswarm plot for the high-risk class.' },
+    { type: 'image', src: '/work/noura/shap_global_importance.png', w: 1473, h: 1030, alt: 'SHAP global feature importance chart', caption: 'SHAP: global feature importance.' },
+    { type: 'image', src: '/work/noura/shap_beeswarm_high_risk.png', w: 1628, h: 1394, alt: 'SHAP beeswarm plot for the high-risk class', caption: 'SHAP: beeswarm plot for the high-risk class.' },
     {
       type: 'code',
-      title: 'Risk banding and SHAP factors — ml_service/app/predictor.py (excerpt)',
+      title: 'Risk banding and SHAP factors: ml_service/app/predictor.py (excerpt)',
       lang: 'python',
       code: `probs = self.model.predict_proba(row_df)[0]
 
@@ -485,7 +485,7 @@ top_idx = np.argsort(np.abs(sv))[::-1][:3]   # top 3 factors`,
   ],
   lessons: {
     challenges: [
-      'Building labels from survey indicators — the model can only be as meaningful as the rules that defined “risk”.',
+      'Building labels from survey indicators. The model can only be as meaningful as the rules that defined “risk”.',
       'Class imbalance and the Medium band: tuning the decision threshold improved High recall at the cost of Medium.',
     ],
     learned: [
@@ -494,7 +494,7 @@ top_idx = np.argsort(np.abs(sv))[::-1][:3]   # top 3 factors`,
     ],
     limitations: [
       'Not clinically validated; labels are rule-engineered, so the model reproduces the rules rather than outcomes.',
-      'Medium-class recall is 38%, and overall accuracy is 62.6% — good enough to demonstrate the pipeline, not to rely on.',
+      'Medium-class recall is 38%, and overall accuracy is 62.6%. That is enough to demonstrate the pipeline, not to rely on.',
       'The repository README is stale (apps listed as planned) and the training script’s threshold constant differs from the served thresholds.',
       'Test coverage and pass rates are unverified.',
     ],
@@ -513,9 +513,9 @@ const orders: CaseStudy = {
   name: 'Automated Order Management',
   category: 'automation',
   kind: 'Business-process automation',
-  tagline: 'From an order form to stock alerts, confirmations and reminders — without manual handling.',
+  tagline: 'Order form in, stock alerts, confirmations and reminders out.',
   summary:
-    'An end-to-end order management and fulfilment automation: orders are collected in Jotform, organised in Airtable by Make scenarios, and drive automated emails — confirmations, low-stock alerts, payment reminders, admin follow-ups and loyalty messages — with an Airtable dashboard for visibility.',
+    'Orders come in through Jotform and Make files them in Airtable. From there Make sends confirmation emails, low-stock alerts, payment reminders, admin follow-ups and loyalty emails. An Airtable dashboard shows orders, stock and revenue.',
   domain: 'Small-business order fulfilment',
   status: 'Deployed',
   statusNote: 'A live public Make scenario and Airtable dashboard. Built as a demonstration system; no clients, users or business results are claimed.',
@@ -577,7 +577,7 @@ const orders: CaseStudy = {
   evidence: [
     { type: 'link', label: 'Live public Make scenario', href: 'https://us2.make.com/public/shared-scenario/IZ5i0G4m43B/enhanced-optimized-automated-order-man', note: 'Loads (HTTP 200). This is the authoritative view of the workflow.' },
     { type: 'link', label: 'Airtable order dashboard', href: 'https://airtable.com/appxqNwa54nRskl01/pagDjSdKGVPwoZzXJ', note: 'Loads (HTTP 200).' },
-    { type: 'missing', text: 'Placeholder — add screenshots of the Make scenario canvas and the Airtable dashboard to /public/work/orders/. None are stored in my repositories, so none are shown here.' },
+    { type: 'missing', text: 'Placeholder: add screenshots of the Make scenario canvas and the Airtable dashboard to /public/work/orders/. None are stored in my repositories, so none are shown here.' },
   ],
   lessons: {
     challenges: ['Keeping several emails independent so a change to one trigger does not affect the others.'],
@@ -598,9 +598,9 @@ const creators: CaseStudy = {
   name: 'User Extraction & Content Creator Intelligence System',
   category: 'automation',
   kind: 'Automation & data intelligence',
-  tagline: 'A pipeline that turns scattered creator profiles into a structured, analysable database.',
+  tagline: 'Pulls creator profiles from YouTube and X into one Airtable database.',
   summary:
-    'Make scenarios extract creator data from YouTube and X (Twitter), enrich and normalise it, and load it into a centralised Airtable database. Airtable dashboards analyse engagement, niches and growth indicators to evaluate creators for campaigns, partnerships or creator programmes.',
+    'Two Make scenarios extract creator data from YouTube and X. The data is cleaned into one structure and stored in a central Airtable base, with dashboards for engagement, niche and growth. The idea is to compare creators for campaigns or partnerships.',
   domain: 'Data extraction · creator analytics',
   status: 'Deployed',
   statusNote: 'Public Make scenarios and a live Airtable dashboard exist. Built as a demonstration; no campaign results or users are claimed.',
@@ -609,8 +609,8 @@ const creators: CaseStudy = {
   links: {
     demo: 'https://airtable.com/appNVy0oVwZJ4F6RU/pagN3G1iNuJE98uZE',
     extra: [
-      { label: 'Make scenario — YouTube extraction', href: 'https://us2.make.com/public/shared-scenario/qMMGAvBIiBW/extract-you-tube' },
-      { label: 'Make scenario — X extraction', href: 'https://us2.make.com/public/shared-scenario/wIgzGiCJumb/extract-x-formerly-twitter' },
+      { label: 'Make scenario: YouTube extraction', href: 'https://us2.make.com/public/shared-scenario/qMMGAvBIiBW/extract-you-tube' },
+      { label: 'Make scenario: X extraction', href: 'https://us2.make.com/public/shared-scenario/wIgzGiCJumb/extract-x-formerly-twitter' },
     ],
   },
   hero: { kind: 'concept', seed: 9, chips: ['YouTube', 'X', 'Airtable'] },
@@ -661,9 +661,9 @@ const creators: CaseStudy = {
   ],
   evidence: [
     { type: 'link', label: 'Creator analytics dashboard', href: 'https://airtable.com/appNVy0oVwZJ4F6RU/pagN3G1iNuJE98uZE', note: 'Loads (HTTP 200).' },
-    { type: 'link', label: 'Make scenario — YouTube extraction', href: 'https://us2.make.com/public/shared-scenario/qMMGAvBIiBW/extract-you-tube', note: 'Loads (HTTP 200).' },
-    { type: 'link', label: 'Make scenario — X extraction', href: 'https://us2.make.com/public/shared-scenario/wIgzGiCJumb/extract-x-formerly-twitter', note: 'Loads (HTTP 200).' },
-    { type: 'missing', text: 'Placeholder — add screenshots of the dashboard and the Airtable field schema to /public/work/creators/. Only link-level evidence is verifiable from my repositories.' },
+    { type: 'link', label: 'Make scenario: YouTube extraction', href: 'https://us2.make.com/public/shared-scenario/qMMGAvBIiBW/extract-you-tube', note: 'Loads (HTTP 200).' },
+    { type: 'link', label: 'Make scenario: X extraction', href: 'https://us2.make.com/public/shared-scenario/wIgzGiCJumb/extract-x-formerly-twitter', note: 'Loads (HTTP 200).' },
+    { type: 'missing', text: 'Placeholder: add screenshots of the dashboard and the Airtable field schema to /public/work/creators/. Only link-level evidence is verifiable from my repositories.' },
   ],
   lessons: {
     challenges: ['Reconciling two platforms’ different data shapes into one record structure.'],
@@ -681,12 +681,12 @@ const creators: CaseStudy = {
 const memo: CaseStudy = {
   slug: 'memo-file-sharing',
   num: '06',
-  name: 'MEMO — Local Network File Sharing',
+  name: 'MEMO: Local Network File Sharing',
   category: 'software',
   kind: 'Desktop application · networking',
-  tagline: 'A Tkinter desktop app that shares files between machines on the same network over raw TCP.',
+  tagline: 'A desktop app that shares files between machines on the same network.',
   summary:
-    'MEMO is a Python desktop application for sharing files across a local network. Each instance runs a TCP file server in a background thread, scans its subnet for peers, lists and downloads their shared items, and keeps shared folders, a private device list and a sharing history in the interface.',
+    'A Python and Tkinter app. Each copy runs a small TCP file server in a background thread, scans the subnet for other copies, and lists and downloads what they share. It also has shared folders, a private device list and a history tab.',
   domain: 'Local-network file transfer',
   status: 'Prototype',
   statusNote: 'Works as a desktop prototype, from a single commit. The deployed Vercel link in the repository returns 404, so it is not presented as a demo.',
@@ -695,7 +695,7 @@ const memo: CaseStudy = {
   links: { repo: `${GH}/file-sharing-app` },
   hero: { kind: 'concept', seed: 14, chips: ['TCP', 'Peers', 'Folders'] },
   problem: [
-    'Moving a file between two computers on the same Wi-Fi usually means a cable, a USB drive or an upload to a cloud service and back — slow and, for large files, wasteful when both machines are a few metres apart.',
+    'Moving a file between two computers on the same Wi-Fi usually means a cable, a USB drive or an upload to a cloud service and back. That is slow and, for large files, wasteful when both machines are a few metres apart.',
     'MEMO explores a direct approach: each machine shares a folder and serves it to peers on the local network, with a simple public / private mode.',
   ],
   solution: {
@@ -747,7 +747,7 @@ const memo: CaseStudy = {
   evidence: [
     {
       type: 'code',
-      title: 'Request handling in the server thread — main.py (excerpt)',
+      title: 'Request handling in the server thread: main.py (excerpt)',
       lang: 'python',
       code: `data = conn.recv(1024)
 if data == b"REQUEST_FILE_LIST":
@@ -762,7 +762,7 @@ elif data == b"TEST_CONNECTION":
     },
     {
       type: 'code',
-      title: 'Length-prefixed streaming — main.py (excerpt)',
+      title: 'Length-prefixed streaming: main.py (excerpt)',
       lang: 'python',
       code: `file_size = os.path.getsize(item_path)
 conn.sendall(struct.pack("!Q", file_size))
@@ -775,11 +775,11 @@ with open(item_path, "rb") as f:
         conn.sendall(chunk)`,
       source: 'file-sharing-app/main.py',
     },
-    { type: 'missing', text: 'Placeholder — add desktop screenshots of the Files, Devices and History tabs to /public/work/memo/. None are stored in the repository.' },
+    { type: 'missing', text: 'Placeholder: add desktop screenshots of the Files, Devices and History tabs to /public/work/memo/. None are stored in the repository.' },
   ],
   lessons: {
     challenges: ['Doing network I/O and the scan off the UI thread so the interface stays responsive.', 'Designing a protocol with just enough framing to stream large files.'],
-    learned: ['How quickly security gaps appear once a program listens on a port — see limitations.'],
+    learned: ['How quickly security gaps appear once a program listens on a port (see limitations).'],
     limitations: [
       'Private mode is enforced in the interface only: the access check compares the local machine’s own address, not the connecting peer’s, and the server does not consult the device list.',
       'The requested item name is joined to the shared directory without normalisation, so path handling needs hardening.',
@@ -798,9 +798,9 @@ const weather: CaseStudy = {
   name: 'WeatherSphere',
   category: 'software',
   kind: 'Full-stack web application',
-  tagline: 'A weather blog: a real-time feed of reports from different places, plus live weather search.',
+  tagline: 'A weather blog: people post local conditions, anyone can search a city.',
   summary:
-    'A React single-page application where visitors post weather conditions for their area into a live feed and search for current weather in any city. Posts are stored in Firebase Firestore and streamed to the page in real time; city search calls the OpenWeatherMap API.',
+    'A React app where visitors post weather reports for their area into a live feed, and search current weather for any city. Reports are stored in Firebase Firestore and update in real time. City search uses the OpenWeatherMap API.',
   domain: 'Community weather reports',
   status: 'Deployed',
   statusNote: 'Live on Vercel (loads, HTTP 200). A small project; authentication was removed in the latest redesign.',
@@ -814,7 +814,7 @@ const weather: CaseStudy = {
   ],
   solution: {
     intro:
-      'Three routes — home feed, weather search and about — in a React Router single-page app. The feed reads and writes Firestore; search calls OpenWeatherMap.',
+      'Three routes (home feed, weather search, about) in a React Router single-page app. The feed reads and writes Firestore; search calls OpenWeatherMap.',
     implemented: [
       'Home feed of weather reports ordered by creation time, updating live through a Firestore snapshot listener.',
       'A report form (name, location, condition, temperature with °C/°F unit, description) that writes to Firestore.',
@@ -855,14 +855,14 @@ const weather: CaseStudy = {
   evidence: [
     {
       type: 'code',
-      title: 'Live feed subscription — Home.jsx (excerpt)',
+      title: 'Live feed subscription: Home.jsx (excerpt)',
       lang: 'javascript',
       code: `const q = query(collection(db, 'reports'), orderBy('createdAt', 'desc'));`,
       source: 'WeatherSphere/user-blog/src/pages/Home.jsx',
     },
     {
       type: 'code',
-      title: 'Weather search error handling — Weatherapp.jsx (excerpt)',
+      title: 'Weather search error handling: Weatherapp.jsx (excerpt)',
       lang: 'javascript',
       code: `const data = await res.json();
 if (data.cod !== 200) {
@@ -877,7 +877,7 @@ if (data.cod !== 200) {
       source: 'WeatherSphere/user-blog/src/pages/Weatherapp.jsx',
     },
     { type: 'link', label: 'Live application', href: 'https://weather-sphere-theta.vercel.app', note: 'Loads (HTTP 200).' },
-    { type: 'missing', text: 'Placeholder — add screenshots of the feed and search page to /public/work/weathersphere/.' },
+    { type: 'missing', text: 'Placeholder: add screenshots of the feed and search page to /public/work/weathersphere/.' },
   ],
   lessons: {
     challenges: ['Keeping a live feed consistent with the posting form and filters.'],
@@ -940,7 +940,7 @@ export const mlProjects: Compact[] = [
     category: 'ml',
     blurb:
       'A Python script trains a scikit-learn RandomForestRegressor (100 trees, depth 15) on a rental listings CSV with 7 features (BHK, size, floor, bathrooms, furnishing, area type, city). A Next.js interface calls a Python prediction script. Only training-set RMSE and R² are computed in code; no held-out evaluation is recorded, so no performance figure is claimed.',
-    status: 'Prototype — runnable locally',
+    status: 'Prototype, runs locally',
     tech: ['Python', 'scikit-learn', 'Random Forest', 'Next.js'],
     repo: `${GH}/Machine-Learning/tree/master/house-prediction`,
     note: 'Predicts rental prices despite the name; the training script has a hard-coded local file path.',
@@ -968,7 +968,7 @@ export const mlProjects: Compact[] = [
     category: 'ml',
     blurb:
       'The folder contains the unmodified create-next-app starter page plus a header/footer and a preferences route. No collaborative or content-based filtering is implemented, despite the repository README.',
-    status: 'Not implemented — scaffold only',
+    status: 'Not implemented, scaffold only',
     tech: ['Next.js'],
     repo: `${GH}/Machine-Learning/tree/master/movie-recommendation`,
     note: 'Shown for transparency; consider removing or building out.',

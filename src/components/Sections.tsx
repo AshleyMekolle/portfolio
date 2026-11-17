@@ -39,7 +39,7 @@ export function Expertise() {
           <p className="mono sec__idx">03</p>
           <h2 id="exp2-h" className="sec__title">Expertise</h2>
           <p className="sec__note muted">
-            <strong>Bold</strong> is demonstrated in the featured work; the rest I have used in internships or smaller projects.
+            <strong>Bold</strong> is shown in the featured work. The rest I have used in internships or smaller projects.
           </p>
         </Reveal>
         <div className="disc">
@@ -64,7 +64,7 @@ export function Expertise() {
             </Reveal>
           ))}
         </div>
-        <Reveal as="p" className="mono muted disc__tools">Tools — {tools}</Reveal>
+        <Reveal as="p" className="mono muted disc__tools">Tools: {tools}</Reveal>
       </div>
     </section>
   )
@@ -80,13 +80,13 @@ export function About() {
         </Reveal>
         <Reveal className="about__body" delay={60}>
           <p className="about__lead">
-            I’m a software engineer who likes the whole system: understanding the problem, designing the solution, building
-            the backend, integrating APIs and AI, and automating what is repetitive.
+            I like working on the whole system: understanding the problem, designing the solution, building the backend,
+            wiring in APIs and AI, and automating what is repetitive.
           </p>
           <p className="muted">
-            My experience spans a Laravel backend internship, automation engineering with n8n, Make and Zapier, and
-            cross-platform apps in Flutter. My own projects put language models and machine learning behind real
-            interfaces — and I try to say plainly what each one does and does not do.
+            I have worked on a Laravel backend, built automation in n8n, Make and Zapier, and shipped mobile features in
+            Flutter. My own projects put language models and machine learning behind real interfaces. I write down what
+            each one does and what it doesn’t.
           </p>
         </Reveal>
         <Reveal as="aside" className="edu" delay={120} aria-label="Education and recognition">
@@ -114,12 +114,12 @@ export function Contact() {
       </div>
       <div className="wrap contact__inner">
         <Reveal>
-          <p className="mono contact__idx">05 — Contact</p>
+          <p className="mono contact__idx">05 / Contact</p>
           <h2 id="contact-h" className="contact__title">
             Have a problem <em className="accent">worth solving?</em>
           </h2>
           <p className="lead contact__lead">
-            I’m interested in opportunities where software engineering, applied AI and automation can make a practical difference.
+            I’m looking for a junior role in software engineering, applied AI or automation. If you have a problem like that, email me.
           </p>
           <a className="contact__mail" href={`mailto:${site.email}`}>{site.email}</a>
         </Reveal>

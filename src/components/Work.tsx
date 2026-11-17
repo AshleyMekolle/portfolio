@@ -61,7 +61,7 @@ function Status({ s }: { s: CaseStudy }) {
   )
 }
 
-/* 01 — wide screenshot left, narrow column right, giant numeral behind */
+/* 01 - wide screenshot left, narrow column right, giant numeral behind */
 function One({ s, descriptor, notes, n }: F) {
   const h = heroImg(s)
   return (
@@ -83,7 +83,7 @@ function One({ s, descriptor, notes, n }: F) {
   )
 }
 
-/* 02 — text left, screenshot right with a second, smaller frame overlapping it */
+/* 02 - text left, screenshot right with a second, smaller frame overlapping it */
 function Two({ s, descriptor, notes, n }: F) {
   const h = heroImg(s)
   return (
@@ -106,14 +106,14 @@ function Two({ s, descriptor, notes, n }: F) {
           <div className="shot">
             <Image src="/work/mboko/workflow-retrieval.png" alt="The n8n retrieval and answer workflow: chat trigger, vector search, grounded answer chain." width={1113} height={388} sizes="(min-width: 1000px) 30vw, 70vw" />
           </div>
-          <figcaption className="figcap">Screenshot — the n8n retrieval workflow.</figcaption>
+          <figcaption className="figcap">Screenshot: the n8n retrieval workflow.</figcaption>
         </figure>
       </div>
     </Reveal>
   )
 }
 
-/* 03 — oversized title across the page, annotations in a margin column, diagram offset right */
+/* 03 - oversized title across the page, annotations in a margin column, diagram offset right */
 function Three({ s, descriptor, notes, n }: F) {
   const h = heroImg(s)
   return (
@@ -139,7 +139,7 @@ function Three({ s, descriptor, notes, n }: F) {
   )
 }
 
-/* 04 — inverted panel; a typographic workflow outline instead of a screenshot */
+/* 04 - inverted panel; a typographic workflow outline instead of a screenshot */
 function Four({ s, descriptor, notes, n }: F) {
   return (
     <Reveal as="article" className="f f4 on-night">
@@ -180,8 +180,8 @@ export default function Work() {
           <h2 id="work-h" className="work__h">Selected work</h2>
           <div className="work__aside">
             <p className="mono">(04)</p>
-            <p className="lead">Systems I’ve designed, built and brought to life.</p>
-            <p className="muted work__note">Each links to a full case study: architecture, my contribution, decisions, results and limits. Status labels are literal.</p>
+            <p className="lead">Four projects I built, with the code, diagrams and numbers behind them.</p>
+            <p className="muted work__note">Each has a full case study: how it works, what I wrote and what I would change. Status labels are literal, so an MVP is called an MVP.</p>
           </div>
         </Reveal>
 
@@ -192,7 +192,7 @@ export default function Work() {
 
         <Reveal className="work__more">
           <p className="display-m">
-            {extra} more entries — further case studies, ML exercises and the development archive.
+            {extra} more projects: further case studies, small ML experiments and older exercises.
           </p>
           <Link className="btn" href="/archive">
             Open the archive <span className="arrow" aria-hidden="true">→</span>

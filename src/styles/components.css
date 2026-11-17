@@ -27,7 +27,7 @@
 .nav__sheet { position: fixed; inset: 68px 0 0 0; background: var(--paper); padding-block: 24px 48px; overflow-y: auto; border-top: 1px solid var(--line); }
 .nav__sheet[hidden] { display: none; }
 .nav__sheet nav { display: flex; flex-direction: column; }
-.nav__sheet a { font-family: var(--f-display); font-size: 2.1rem; letter-spacing: -0.02em; text-decoration: none; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.nav__sheet a { font-family: var(--f-display); font-weight: 500; font-size: 1.7rem; letter-spacing: -0.03em; text-decoration: none; padding: 14px 0; border-bottom: 1px solid var(--line); }
 @media (min-width: 900px) { .nav__links { display: flex; } .nav__toggle, .nav__sheet { display: none !important; } }
 
 /* ───── case study ───── */
@@ -36,7 +36,7 @@
 .case__crumb a { text-decoration: none; border-bottom: 1px solid var(--line-strong); }
 .case__crumb a:hover { color: var(--accent); }
 .case__num { color: var(--accent); }
-.case__title { max-width: 18ch; font-size: clamp(2.6rem, 7vw, 6rem); }
+.case__title { max-width: 22ch; font-size: clamp(2.2rem, 5vw, 4.2rem); }
 .case__tag { max-width: 58ch; }
 
 .case__layout { display: grid; gap: 40px; padding-top: clamp(48px, 7vw, 96px); padding-bottom: 40px; }
@@ -53,9 +53,9 @@
 .case__body { display: grid; gap: clamp(56px, 8vw, 104px); min-width: 0; }
 .cs { display: grid; gap: 18px; max-width: 760px; scroll-margin-top: 90px; font-size: 17px; }
 .cs--wide { max-width: none; }
-.cs__h { font: 400 clamp(1.7rem, 3vw, 2.4rem)/1.1 var(--f-display); letter-spacing: -0.02em; padding-bottom: 14px; border-bottom: 1px solid var(--ink); display: flex; gap: 16px; align-items: baseline; }
+.cs__h { font: 500 clamp(1.4rem, 2.2vw, 1.9rem)/1.15 var(--f-display); letter-spacing: -0.03em; padding-bottom: 14px; border-bottom: 1px solid var(--ink); display: flex; gap: 16px; align-items: baseline; }
 .cs__h .mono { color: var(--accent); }
-.cs__lead { font-family: var(--f-display); font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.35; letter-spacing: -0.01em; }
+.cs__lead { font-family: var(--f-display); font-weight: 500; font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.4; letter-spacing: -0.02em; }
 .cs p { color: var(--ink-2); }
 
 .facts { display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--line-strong); margin: 8px 0 0; }

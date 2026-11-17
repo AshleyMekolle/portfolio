@@ -26,7 +26,7 @@ export default function ProjectVisual({ study, priority = false, sizes }: { stud
           ))}
         </ul>
       </div>
-      <figcaption className="figcap">Conceptual composition — not a screenshot of the product.</figcaption>
+      <figcaption className="figcap">Conceptual composition, not a screenshot of the product.</figcaption>
     </figure>
   )
 }

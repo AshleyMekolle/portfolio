@@ -17,11 +17,11 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const c = getCase(params.slug)
   if (!c) return {}
   return {
-    title: `${c.name} — case study`,
+    title: `${c.name}: case study`,
     description: `${c.tagline} ${c.summary}`.slice(0, 280),
     alternates: { canonical: `/work/${c.slug}` },
-    openGraph: { title: `${c.name} — case study`, description: c.tagline, type: 'article', url: `/work/${c.slug}` },
-    twitter: { card: 'summary_large_image', title: `${c.name} — case study`, description: c.tagline },
+    openGraph: { title: `${c.name}: case study`, description: c.tagline, type: 'article', url: `/work/${c.slug}` },
+    twitter: { card: 'summary_large_image', title: `${c.name}: case study`, description: c.tagline },
   }
 }
 

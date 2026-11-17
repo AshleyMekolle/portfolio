@@ -31,29 +31,29 @@ export const experience = [
   {
     company: 'Teksynapse.AI',
     role: 'Software Engineering Intern',
-    period: 'Sep 2025 — Mar 2026',
-    line: 'Laravel and PHP backend features and REST APIs behind frontend clients; API integrations and data processing.',
+    period: 'Sep 2025 to Mar 2026',
+    line: 'Backend features and REST APIs in Laravel and PHP for frontend clients, plus API integrations and data processing.',
     stack: 'Laravel · PHP · REST APIs',
   },
   {
     company: 'Nexora Dynamics',
     role: 'Software Developer',
-    period: 'Dec 2025 — Jul 2026',
+    period: 'Dec 2025 to Jul 2026',
     line: 'Cross-platform mobile features in Flutter and FlutterFlow, integrated with backend REST APIs.',
     stack: 'Flutter · FlutterFlow · REST APIs',
   },
   {
     company: 'HNG Tech',
     role: 'No-Code Automation Engineer',
-    period: 'Oct 2025 — Dec 2025',
-    line: 'Multi-step workflows in n8n, Make and Zapier, with Airtable and Jotform integrations that automate data collection and routing.',
+    period: 'Oct 2025 to Dec 2025',
+    line: 'Multi-step workflows in n8n, Make and Zapier, with Airtable and Jotform integrations for collecting and routing data.',
     stack: 'n8n · Make · Zapier · Airtable · Jotform',
   },
   {
     company: 'Camsol Technologies',
     role: 'Frontend Development Intern',
-    period: 'Aug 2025 — Sep 2025',
-    line: 'Responsive, accessible and reusable UI components in Next.js and TypeScript.',
+    period: 'Aug 2025 to Sep 2025',
+    line: 'Responsive, reusable UI components in Next.js and TypeScript.',
     stack: 'Next.js · TypeScript',
   },
 ]
@@ -63,7 +63,7 @@ export const experience = [
 export const expertise = [
   {
     title: 'Applied AI & Machine Learning',
-    line: 'Putting language models and ML models inside real systems, and measuring how they behave.',
+    line: 'Language models and ML models inside real systems, with tests for how they behave.',
     core: ['LLM API integration', 'Retrieval-augmented generation', 'XGBoost', 'SHAP explainability'],
     also: ['Embeddings', 'scikit-learn'],
     cases: [
@@ -74,7 +74,7 @@ export const expertise = [
   },
   {
     title: 'Automation & Integrations',
-    line: 'Connecting services so repetitive processes run themselves — and recover when they fail.',
+    line: 'Connecting services so repetitive processes run themselves, and recover when they fail.',
     core: ['n8n', 'Make', 'Webhooks', 'API orchestration'],
     also: ['Zapier', 'Airtable', 'Jotform'],
     cases: [
@@ -84,14 +84,14 @@ export const expertise = [
   },
   {
     title: 'Backend Engineering',
-    line: 'Layered services with validation, clear contracts and sensible failure behaviour.',
+    line: 'Layered services with validation and clear behaviour when something fails.',
     core: ['Python', 'Django REST', 'FastAPI', 'PostgreSQL', 'REST API design'],
     also: ['Laravel', 'PHP', 'Node.js', 'MySQL', 'Firebase'],
     cases: [{ label: 'Noura', slug: 'noura' }],
   },
   {
     title: 'Frontend & Application Development',
-    line: 'The interfaces for those systems — web, mobile and desktop.',
+    line: 'The interfaces for those systems on web, mobile and desktop.',
     core: ['React', 'Next.js', 'TypeScript'],
     also: ['JavaScript', 'React Native', 'Flutter', 'FlutterFlow', 'Tkinter'],
     cases: [
@@ -104,8 +104,8 @@ export const tools = 'Git · GitHub (webhooks, REST API, Actions) · API testing
 
 export const education = {
   school: 'University of Buea',
-  degree: 'Computer Engineering — Software Engineering specialisation',
-  period: '2022 — expected December 2026',
+  degree: 'Computer Engineering, Software Engineering specialisation',
+  period: '2022 to expected December 2026',
   awards: [
     'Two-time awardee, Kate Kanyi-Tometi Scholarship Fund',
     'Two-time awardee, Presidential Excellency Award',

@@ -34,7 +34,7 @@ export default function Nav() {
   return (
     <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
       <div className="wrap nav__bar">
-        <Link href="/" className="nav__brand" aria-label="Mekolle Ashley — home" onClick={() => setOpen(false)}>
+        <Link href="/" className="nav__brand" aria-label="Mekolle Ashley, home" onClick={() => setOpen(false)}>
           <span className="nav__mono" aria-hidden="true">MA</span>
           <span className="nav__name">Mekolle Ashley</span>
         </Link>

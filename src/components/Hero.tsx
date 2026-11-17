@@ -31,8 +31,8 @@ export default function Hero() {
           </p>
           <div className="hero__body">
             <p className="lead">
-              I design and build intelligent applications, backend systems and automated workflows — connecting software,
-              APIs and AI to turn complex processes into working solutions.
+              I build apps, backend services and automated workflows that connect software, APIs and AI. Most of my
+              projects start with a process that was slow or manual and end with something that runs on its own.
             </p>
             <div className="hero__cta">
               <a className="btn btn--solid" href="#work">

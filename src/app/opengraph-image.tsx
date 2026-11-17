@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
-export const alt = 'Mekolle Ashley — AI, Automation & Software Engineer'
+export const alt = 'Mekolle Ashley | AI, Automation & Software Engineer'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -18,7 +18,7 @@ export default function OG() {
           <span style={{ color: '#3d5a47' }}>that make work happen.</span>
         </div>
         <div style={{ display: 'flex', fontSize: 26, color: '#3b3a36' }}>
-          Applied AI · Intelligent automation · Backend engineering
+          AI · Automation · Backend
         </div>
       </div>
     ),
